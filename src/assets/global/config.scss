@@ -1,0 +1,10 @@
+@forward "reset";
+@forward "fonts";
+
+@use "variables";
+@use "sass:map";
+
+html,
+body {
+  background-color: map.get(variables.$color, primary);
+}
