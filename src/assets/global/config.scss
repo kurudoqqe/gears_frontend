@@ -7,4 +7,18 @@
 html,
 body {
   background-color: map.get(variables.$color, primary);
+
+  @media (max-width: 350px) {
+    .page-container {
+      max-width: map-get(variables.$page-width, mobile);
+    }
+  }
+}
+
+.page-container {
+  max-width: map.get(variables.$page-width, desktop);
+}
+
+* {
+  color: map.get(variables.$color, white);
 }
