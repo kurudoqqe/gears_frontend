@@ -9,9 +9,7 @@ import Button from "@/components/button/ButtonComponent.vue";
     :style="{ background: `url(${GradientBackground})` }"
   >
     <h1>не знаете что выбрать?</h1>
-    <Button class="help-button">
-      <p class="text-1">Заполнить заявку</p>
-    </Button>
+    <Button class="help-button text-1"> Заполните заявку </Button>
     <p class="text-1">и мы вам подскажем</p>
   </section>
 </template>

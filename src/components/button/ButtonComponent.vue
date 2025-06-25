@@ -18,5 +18,18 @@ const props = defineProps({});
 
   cursor: pointer;
   outline: none;
+
+  transition:
+    color,
+    background-color,
+    border-color,
+    300ms ease-in-out;
+
+  &:hover {
+    background-color: map.get(variables.$color, white);
+    color: map.get(variables.$color, secondary);
+
+    border: 1px solid map.get(variables.$color, secondary);
+  }
 }
 </style>

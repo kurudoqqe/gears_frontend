@@ -5,7 +5,7 @@ import Button from "@/components/button/ButtonComponent.vue";
 <template>
   <section class="video page-container">
     <video controls />
-    <Button class="video-button">Заполнить заявку</Button>
+    <Button class="video-button text-1">Заполнить заявку</Button>
   </section>
 </template>
 
