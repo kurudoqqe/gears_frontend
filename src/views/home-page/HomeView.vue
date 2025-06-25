@@ -1,10 +1,12 @@
 <script setup>
 import PortfolioComponent from "@/views/home-page/components/PortfolioComponent.vue";
 import ServicesContainer from "@/views/home-page/components/ServicesContainer.vue";
+import ApplicationButton from "@/views/home-page/components/ApplicationButton.vue";
 import VideoContainer from "@/views/home-page/components/VideoContainer.vue";
 import WorkProcess from "@/views/home-page/components/WorkProcess.vue";
 import GradientBackground1 from "@/assets/images/background1.png";
 import GradientBackground2 from "@/assets/images/background2.png";
+import GradientBackground3 from "@/assets/images/background3.png";
 import HelpCard from "@/views/home-page/components/HelpCard.vue";
 import Header from "@/components/header/HeaderComponent.vue";
 </script>
@@ -26,6 +28,12 @@ import Header from "@/components/header/HeaderComponent.vue";
     <WorkProcess />
     <PortfolioComponent />
   </article>
+  <article
+    :style="{ backgroundImage: `url(${GradientBackground3})` }"
+    class="third-container"
+  >
+    <ApplicationButton />
+  </article>
 </template>
 
 <style scoped lang="scss">
@@ -37,5 +45,9 @@ article {
 
 .second-container {
   padding-top: 200px;
+}
+
+.third-container {
+  padding-top: 330px;
 }
 </style>
