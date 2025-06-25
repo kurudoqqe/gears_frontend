@@ -14,7 +14,6 @@ import LogoIcon from "@/components/icons/logo.png";
     </div>
     <a href="#" class="text-1">Связаться</a>
   </header>
-  <h1>Услуги и тарифы</h1>
 </template>
 
 <style scoped lang="scss">
