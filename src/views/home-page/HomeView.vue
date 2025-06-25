@@ -1,6 +1,7 @@
 <script setup>
 import ServicesContainer from "@/views/home-page/components/ServicesContainer.vue";
 import VideoContainer from "@/views/home-page/components/VideoContainer.vue";
+import WorkProcess from "@/views/home-page/components/WorkProcess.vue";
 import GradientBackground1 from "@/assets/images/background1.png";
 import GradientBackground2 from "@/assets/images/background2.png";
 import HelpCard from "@/views/home-page/components/HelpCard.vue";
@@ -21,6 +22,7 @@ import Header from "@/components/header/HeaderComponent.vue";
     class="second-container"
   >
     <HelpCard />
+    <WorkProcess />
   </article>
 </template>
 
