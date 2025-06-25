@@ -23,13 +23,28 @@ const props = defineProps({
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/global/variables";
+@use "sass:map";
+
 svg {
+  border-radius: 16px;
+
+  transition:
+    background-color,
+    box-shadow,
+    150ms ease-in-out;
+
   &.left {
     transform: rotateY(0);
   }
 
   &.right {
     transform: rotateY(180deg);
+  }
+
+  &:hover {
+    background-color: rgba(map.get(variables.$color, white), 0.1);
+    box-shadow: 0 0 7px 0 map.get(variables.$color, white);
   }
 }
 </style>
