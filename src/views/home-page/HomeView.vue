@@ -1,4 +1,5 @@
 <script setup>
+import PortfolioComponent from "@/views/home-page/components/PortfolioComponent.vue";
 import ServicesContainer from "@/views/home-page/components/ServicesContainer.vue";
 import VideoContainer from "@/views/home-page/components/VideoContainer.vue";
 import WorkProcess from "@/views/home-page/components/WorkProcess.vue";
@@ -23,13 +24,11 @@ import Header from "@/components/header/HeaderComponent.vue";
   >
     <HelpCard />
     <WorkProcess />
+    <PortfolioComponent />
   </article>
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/global/variables";
-@use "sass:map";
-
 article {
   background-size: 100% 100%;
   background-position: center;
