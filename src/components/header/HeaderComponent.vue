@@ -1,11 +1,11 @@
 <script setup>
-import LogoIcon from "@/components/icons/logo.png";
+import LogoIcon from "@/components/icons/LogoIcon.vue";
 </script>
 
 <template>
   <header class="page-container">
-    <img :src="LogoIcon" alt="logo" @dragstart.prevent />
-    <div class="links">
+    <LogoIcon class="logo" />
+    <div class="header-links">
       <a href="#" class="text-1">Услуги</a>
       <a href="#" class="text-1">Этапы работы</a>
       <a href="#" class="text-1">Портфолио</a>
@@ -30,7 +30,7 @@ header {
 
   border-bottom: 1px solid map.get(variables.$color, white);
 
-  > img {
+  .logo {
     width: 115px;
     height: 35px;
   }
@@ -46,7 +46,7 @@ header {
   }
 }
 
-.links {
+.header-links {
   display: flex;
   gap: 30px;
 
