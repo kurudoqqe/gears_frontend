@@ -151,6 +151,7 @@ onUnmounted(() => {
   gap: 20px;
 
   overflow-x: auto;
+  overflow-y: hidden;
 
   scroll-behavior: smooth;
 }

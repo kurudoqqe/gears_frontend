@@ -145,6 +145,8 @@ onUnmounted(() => {
 
   .card-price {
     align-self: end;
+
+    margin-top: auto;
   }
 }
 </style>

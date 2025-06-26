@@ -51,7 +51,20 @@ header {
   gap: 30px;
 
   > a {
+    padding: 0.25rem 1.25rem;
+
     text-decoration: none;
+
+    border-radius: 20px;
+    transition:
+      background-color,
+      box-shadow,
+      200ms ease-in-out;
+
+    &:hover {
+      background-color: rgba(map.get(variables.$color, white), 0.1);
+      box-shadow: 0 0 7px 0 map.get(variables.$color, white);
+    }
   }
 }
 </style>

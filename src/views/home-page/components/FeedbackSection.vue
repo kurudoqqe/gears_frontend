@@ -31,9 +31,7 @@ import TextInput from "@/components/input/TextInput.vue";
         </div>
       </div>
       <div class="button-container">
-        <Button class="feedback-button">
-          <p class="text-1">Оставить заявку</p>
-        </Button>
+        <Button class="feedback-button">Оставить заявку</Button>
         <p class="info text-2">
           * Нажимая на кнопку, я соглашаюсь на обработку персональных данных,
           <br />
@@ -95,6 +93,9 @@ import TextInput from "@/components/input/TextInput.vue";
 
 .feedback-button {
   width: 100%;
+
+  font-family: "Dela Gothic One", sans-serif;
+  font-size: 1.25rem;
 }
 
 .info {
