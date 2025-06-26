@@ -78,7 +78,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="services page-container">
+  <section class="services page-container" id="services">
     <h1>Услуги и тарифы</h1>
     <div class="card-container">
       <ArrowIcon view="left" class="arrow" @click="toPrevPage" />

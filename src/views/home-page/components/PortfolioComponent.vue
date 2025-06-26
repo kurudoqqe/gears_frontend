@@ -3,7 +3,7 @@ import Card from "@/components/card/CardComponent.vue";
 </script>
 
 <template>
-  <section class="portfolio page-container">
+  <section class="portfolio page-container" id="portfolio">
     <h1>Портфолио</h1>
     <Card class="card">
       <video controls />

@@ -1,6 +1,11 @@
 <script setup>
 import GradientBackground from "@/assets/images/card-background.png";
 import Button from "@/components/button/ButtonComponent.vue";
+
+const jumpToFeedback = () => {
+  const feedbackId = document.querySelector("#feedback");
+  window.scrollTo(0, feedbackId.offsetTop - 125);
+};
 </script>
 
 <template>
@@ -9,7 +14,9 @@ import Button from "@/components/button/ButtonComponent.vue";
     :style="{ background: `url(${GradientBackground})` }"
   >
     <h1>не знаете что выбрать?</h1>
-    <Button class="help-button text-1"> Заполните заявку </Button>
+    <Button class="help-button text-1" @click="jumpToFeedback">
+      Заполните заявку
+    </Button>
     <p class="text-1">и мы вам подскажем</p>
   </section>
 </template>

@@ -44,7 +44,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="team-section page-container">
+  <section class="team-section page-container" id="team">
     <h1>О команде</h1>
     <div class="team-wrapper">
       <ArrowIcon

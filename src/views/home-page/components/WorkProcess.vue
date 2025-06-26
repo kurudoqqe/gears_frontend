@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <section class="work-process page-container">
+  <section class="work-process page-container" id="processes">
     <h1>процесс работы</h1>
     <div class="processes">
       <div class="work first">

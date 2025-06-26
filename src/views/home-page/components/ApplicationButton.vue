@@ -1,10 +1,17 @@
 <script setup>
 import Button from "@/components/button/ButtonComponent.vue";
+
+const jumpToFeedback = () => {
+  const feedbackId = document.querySelector("#feedback");
+  window.scrollTo(0, feedbackId.offsetTop - 125);
+};
 </script>
 
 <template>
   <section class="page-container">
-    <Button class="application-button">Заполнить заявку</Button>
+    <Button class="application-button" @click="jumpToFeedback"
+      >Заполнить заявку</Button
+    >
   </section>
 </template>
 

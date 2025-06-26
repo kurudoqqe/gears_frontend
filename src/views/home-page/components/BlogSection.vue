@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <section class="blog page-container">
+  <section class="blog page-container" id="blog">
     <h1>Блог</h1>
     <div class="blog-content">
       <div class="blog-video">

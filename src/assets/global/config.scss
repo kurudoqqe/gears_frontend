@@ -8,6 +8,8 @@ html,
 body {
   background-color: map.get(variables.$color, primary);
 
+  scroll-behavior: smooth;
+
   @media (max-width: 350px) {
     .page-container {
       max-width: map-get(variables.$page-width, mobile);
@@ -21,4 +23,6 @@ body {
 
 * {
   color: map.get(variables.$color, white);
+
+  scroll-margin-top: 125px;
 }

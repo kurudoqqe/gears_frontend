@@ -5,7 +5,7 @@ import TextInput from "@/components/input/TextInput.vue";
 </script>
 
 <template>
-  <section class="feedback page-container">
+  <section class="feedback page-container" id="feedback">
     <h1>Оставьте заявку и мы свяжемся с вами</h1>
     <div class="feedback-container">
       <div class="feedback-input">

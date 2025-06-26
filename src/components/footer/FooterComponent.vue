@@ -28,11 +28,11 @@ import VKIcon from "@/components/icons/VKIcon.vue";
       </div>
       <div class="second-container">
         <div class="footer-links">
-          <a href="#" class="text-1">Услуги</a>
-          <a href="#" class="text-1">Этапы работы</a>
-          <a href="#" class="text-1">Портфолио</a>
-          <a href="#" class="text-1">Компетенции</a>
-          <a href="#" class="text-1">Блог</a>
+          <a href="#services" class="text-1">Услуги</a>
+          <a href="#processes" class="text-1">Этапы работы</a>
+          <a href="#portfolio" class="text-1">Портфолио</a>
+          <a href="#team" class="text-1">Компетенции</a>
+          <a href="#blog" class="text-1">Блог</a>
         </div>
         <h1>+7 987 654 - 32 - 10</h1>
         <a href="#" class="text-1">Политика конфиденциальности</a>

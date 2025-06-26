@@ -6,13 +6,13 @@ import LogoIcon from "@/components/icons/LogoIcon.vue";
   <header class="page-container">
     <LogoIcon class="logo" />
     <div class="header-links">
-      <a href="#" class="text-1">Услуги</a>
-      <a href="#" class="text-1">Этапы работы</a>
-      <a href="#" class="text-1">Портфолио</a>
-      <a href="#" class="text-1">Компетенции</a>
-      <a href="#" class="text-1">Блог</a>
+      <a href="#services" class="text-1">Услуги</a>
+      <a href="#processes" class="text-1">Этапы работы</a>
+      <a href="#portfolio" class="text-1">Портфолио</a>
+      <a href="#team" class="text-1">Компетенции</a>
+      <a href="#blog" class="text-1">Блог</a>
     </div>
-    <a href="#" class="text-1">Связаться</a>
+    <a href="#feedback" class="text-1">Связаться</a>
   </header>
 </template>
 
