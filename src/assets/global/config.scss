@@ -12,7 +12,7 @@ body {
 
   @media (max-width: 350px) {
     .page-container {
-      max-width: map-get(variables.$page-width, mobile);
+      max-width: map.get(variables.$page-width, mobile);
     }
   }
 }
