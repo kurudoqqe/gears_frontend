@@ -16,6 +16,8 @@ const jumpToFeedback = () => {
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/global/variables";
+
 .page-container {
   margin: 0 auto;
 }
@@ -26,5 +28,13 @@ const jumpToFeedback = () => {
   font-family: "Dela Gothic One", sans-serif;
   font-size: 1.25rem;
   font-weight: 400;
+
+  @include variables.tablet {
+    height: 250px;
+  }
+
+  @include variables.mobile {
+    height: 200px;
+  }
 }
 </style>
