@@ -1,5 +1,8 @@
 <script setup>
 import Card from "@/components/card/CardComponent.vue";
+import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+
+const windowWidth = useWindowWidth();
 </script>
 
 <template>
@@ -22,6 +25,7 @@ import Card from "@/components/card/CardComponent.vue";
             справки (2-НДФЛ, о стаже),...
           </p>
         </div>
+        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>
       </div>
     </Card>
     <Card class="card">
@@ -41,6 +45,7 @@ import Card from "@/components/card/CardComponent.vue";
             справки (2-НДФЛ, о стаже),...
           </p>
         </div>
+        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>
       </div>
     </Card>
     <p class="more text-1">Увидеть больше</p>
@@ -61,6 +66,12 @@ import Card from "@/components/card/CardComponent.vue";
   > h1 {
     margin-bottom: 20px;
   }
+
+  @include variables.mobile {
+    gap: 20px;
+
+    margin: 150px auto 0;
+  }
 }
 
 .card {
@@ -74,10 +85,22 @@ import Card from "@/components/card/CardComponent.vue";
     border: 2px solid map.get(variables.$color, white);
 
     width: 100%;
+
+    @include variables.mobile {
+      aspect-ratio: 320/270;
+    }
   }
 
   &:nth-child(2n) {
     flex-direction: row;
+
+    @include variables.tablet {
+      flex-direction: column;
+    }
+  }
+
+  @include variables.tablet {
+    flex-direction: column;
   }
 }
 
@@ -87,6 +110,10 @@ import Card from "@/components/card/CardComponent.vue";
   gap: 35px;
 
   width: 100%;
+
+  @include variables.tablet {
+    gap: 10px;
+  }
 }
 
 .description {
@@ -100,6 +127,11 @@ import Card from "@/components/card/CardComponent.vue";
 
   b {
     font-weight: 600;
+  }
+
+  @include variables.tablet {
+    justify-content: normal;
+    gap: 10px;
   }
 }
 
