@@ -1,3 +1,5 @@
+@use "@/assets/global/variables";
+
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -5,18 +7,30 @@ h1 {
   font-size: 2rem;
   font-family: "Dela Gothic One", sans-serif;
   text-transform: uppercase;
+
+  @include variables.mobile {
+    font-size: 1.5rem;
+  }
 }
 
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
   font-family: Roboto, sans-serif;
+
+  @include variables.mobile {
+    font-size: 1.25rem;
+  }
 }
 
 .text-1 {
   font-size: 1.25rem;
   font-weight: 300;
   font-family: Roboto, sans-serif;
+
+  @include variables.mobile {
+    font-size: 1rem;
+  }
 }
 
 .text-2 {
