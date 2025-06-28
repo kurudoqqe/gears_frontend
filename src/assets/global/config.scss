@@ -10,7 +10,19 @@ body {
 
   scroll-behavior: smooth;
 
-  @media (max-width: 350px) {
+  @media (max-width: 1000px) {
+    .page-container {
+      max-width: map.get(variables.$page-width, tablet);
+    }
+  }
+
+  @media (max-width: 750px) {
+    .page-container {
+      max-width: calc(map.get(variables.$page-width, tablet) - 200px);
+    }
+  }
+
+  @media (max-width: 500px) {
     .page-container {
       max-width: map.get(variables.$page-width, mobile);
     }
