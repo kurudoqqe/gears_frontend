@@ -57,6 +57,8 @@ import Footer from "@/components/footer/FooterComponent.vue";
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/global/variables";
+
 article {
   background-size: 100% 100%;
   background-position: center;
@@ -65,19 +67,37 @@ article {
 
 .second-container {
   padding-top: 200px;
+
+  @include variables.tablet {
+    padding-top: 150px;
+  }
 }
 
 .third-container {
   padding-top: 330px;
+
+  @include variables.tablet {
+    padding-top: 150px;
+  }
 }
 
 .fourth-container {
   padding-top: 145px;
-  padding-bottom: 200px;
+  padding-bottom: 240px;
+
+  @include variables.tablet {
+    padding-top: 150px;
+    padding-bottom: 160px;
+  }
 }
 
 .fifth-container {
   padding-top: 60px;
   padding-bottom: 240px;
+
+  @include variables.tablet {
+    padding-top: 40px;
+    padding-bottom: 150px;
+  }
 }
 </style>
