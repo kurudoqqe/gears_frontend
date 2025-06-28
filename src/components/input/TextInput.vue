@@ -54,6 +54,11 @@ const model = defineModel();
     color: map.get(variables.$color, white);
     font-family: Roboto, sans-serif;
     font-size: 1rem;
+
+    @include variables.mobile {
+      font-weight: 300;
+      display: none;
+    }
   }
 
   &:focus {
