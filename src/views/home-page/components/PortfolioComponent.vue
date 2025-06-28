@@ -1,6 +1,6 @@
 <script setup>
-import Card from "@/components/card/CardComponent.vue";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+import Card from "@/components/card/CardComponent.vue";
 
 const windowWidth = useWindowWidth();
 </script>
