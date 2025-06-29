@@ -6,34 +6,67 @@ import ArrowIcon from "@/components/icons/ArrowIcon.vue";
 
 const cardsData = [
   {
-    content: "asdasdasdasdasdasdasd.",
-    price: "от 333 333 ₽",
-    title: "qwe",
+    content:
+      "Сайты, админки, личные кабинеты (Django, DRF, FastAPl, Vue/React)",
+    price: "от 49.990 руб.",
+    title: "Веб-разработка",
   },
   {
-    content: "asdsjkadfajsajkfksd.",
-    price: "от 666 ₽",
-    title: "rty",
+    content: "UI/UX, брендирование, лендинги, презентации",
+    price: "от 19.990 руб.",
+    title: "Дизайн",
   },
   {
-    content: "dfgkdnfgsdlkfgnlskdfgknlsdknlfgnkdsfgkndslknfg.",
-    price: "от 99999999 ₽",
-    title: "123",
+    content: "Архитектура, сборка, DevOps (Docker, CI/CD)",
+    title: "Микросервисы, MVP, Saas, CRM, LMS системы",
+    price: "от 100000 руб.",
   },
   {
-    content: "ajsdalskdjgsdgksdhj.",
-    price: "от 901 000 ₽",
-    title: "zxc",
+    title: "Одностраничный сайт",
+    price: "от 6.490 руб.",
+    content: "",
   },
   {
-    content: "xvcxnjxvkjsfksndklfksldf.",
-    price: "от 40 000 ₽",
-    title: "vbn",
+    content:
+      "От простых до интегрированных с CRM, оплатой, воронками, аналитикой",
+    title: "Telegram-боты/miniapp",
+    price: "от 9.900 руб.",
   },
   {
-    content: "wqeorqwejrhlqwkerhjqwkhjerhwkqler.",
-    price: "от 30 123 ₽",
-    title: "098",
+    content: "Скрипты, интеграции с АРl, парсеры, автозадачи",
+    price: "от 29.900 руб.",
+    title: "Автоматизация",
+  },
+
+  {
+    price: "Цена по договоренности",
+    title: "Доработка проектов",
+    content: "",
+  },
+  {
+    price: "Цена по договоренности",
+    title: "Сопровождение проектов",
+    content: "",
+  },
+  {
+    price: "Цена по договоренности",
+    title: "Продвижение продуктов",
+    content: "",
+  },
+  {
+    price: "от 1.500 руб.",
+    title: "Монтаж видео",
+    content: "",
+  },
+  {
+    price: "от 3.500 руб./час",
+    title: "Съёмка видео",
+    content: "",
+  },
+  {
+    title: "Продюсерские услуги под ключ",
+    price: "Цена по договоренности",
+    content: "",
   },
 ];
 
@@ -147,7 +180,7 @@ onUnmounted(() => {
 
   padding: 2.25rem;
 
-  word-break: break-all;
+  word-break: break-word;
 
   .card-price {
     align-self: end;
