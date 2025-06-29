@@ -17,11 +17,21 @@ const jumpToFeedback = () => {
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/global/variables";
+
 .video {
   display: flex;
   flex-direction: column;
 
   margin: 30px auto 200px;
+
+  @include variables.mobile {
+    margin: 20px auto 150px;
+
+    > video {
+      height: 640px;
+    }
+  }
 }
 
 .video-button {
