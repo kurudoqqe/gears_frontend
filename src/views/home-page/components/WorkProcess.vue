@@ -72,18 +72,28 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/global/variables";
+
 .work-process {
   display: flex;
   flex-direction: column;
   gap: 50px;
 
   margin: 200px auto 0;
+
+  @include variables.mobile {
+    margin: 150px auto 0;
+  }
 }
 
 .processes {
   display: flex;
   flex-direction: column;
   gap: 60px;
+
+  @include variables.tablet {
+    gap: 50px;
+  }
 }
 
 .work {
@@ -105,6 +115,10 @@
 
   &.third {
     margin-left: 80px;
+
+    @include variables.tablet {
+      margin: 0;
+    }
   }
 
   &.fourth {
@@ -118,6 +132,10 @@
 
     .text-2 {
       text-align: end;
+    }
+
+    @include variables.tablet {
+      margin: 0;
     }
   }
 
@@ -135,6 +153,10 @@
 
   &.seventh {
     margin-left: 200px;
+
+    @include variables.tablet {
+      margin: 0;
+    }
   }
 }
 </style>
