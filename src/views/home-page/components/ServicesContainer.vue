@@ -101,11 +101,17 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/global/variables";
+
 .services {
   display: flex;
   flex-direction: column;
   gap: 50px;
   margin: 0 auto;
+
+  @include variables.mobile {
+    gap: 40px;
+  }
 }
 
 .card-container {
