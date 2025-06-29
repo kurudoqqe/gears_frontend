@@ -7,23 +7,67 @@ import RutubeIcon from "@/components/icons/RutubeIcon.vue";
 import HabrIcon from "@/components/icons/HabrIcon.vue";
 import LogoIcon from "@/components/icons/LogoIcon.vue";
 import VKIcon from "@/components/icons/VKIcon.vue";
+
+const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
+
+const goToLink = (url) => {
+  window.open(url);
+};
 </script>
 
 <template>
   <footer class="footer">
     <section class="page-container">
       <div class="first-container">
-        <LogoIcon class="logo" />
+        <LogoIcon class="logo" @click="scrollToTop" />
         <p class="text-1">По вопросам сотрудничества пишите на почту</p>
-        <h1>gears.team@mail.ru</h1>
+        <h1><a href="mailto:gears.team@mail.ru">gears.team@mail.ru</a></h1>
         <div class="footer-icons">
-          <TelegramIcon class="tg-icon" />
-          <InstagramIcon class="inst-icon" />
-          <VKIcon class="vk-icon" />
-          <YoutubeIcon class="yt-icon" />
-          <TikTokIcon class="tt-icon" />
-          <HabrIcon class="habr-icon" />
-          <RutubeIcon class="rutube-icon" />
+          <TelegramIcon
+            class="tg-icon"
+            @click="() => goToLink('https://t.me/by_gears')"
+          />
+          <InstagramIcon
+            class="inst-icon"
+            @click="
+              () =>
+                goToLink(
+                  ' https://www.instagram.com/gears_programming?igsh=MWxyeW1iZnVrY2Exbw',
+                )
+            "
+          />
+          <VKIcon
+            class="vk-icon"
+            @click="() => goToLink('https://vk.com/gears.official')"
+          />
+          <YoutubeIcon
+            class="yt-icon"
+            @click="
+              () =>
+                goToLink(
+                  'https://youtube.com/@gears.official?si=GRKvgnahQT0WdmLN',
+                )
+            "
+          />
+          <TikTokIcon
+            class="tt-icon"
+            @click="
+              () =>
+                goToLink(
+                  'https://www.tiktok.com/@company.gears?_t=ZS-8xHtnaJER2W&_r=1',
+                )
+            "
+          />
+          <HabrIcon
+            class="habr-icon"
+            @click="() => goToLink('https://habr.com/ru/settings/others/')"
+          />
+          <RutubeIcon
+            class="rutube-icon"
+            @click="() => goToLink('https://rutube.ru/channel/56314948/')"
+          />
         </div>
       </div>
       <div class="second-container">
@@ -34,7 +78,7 @@ import VKIcon from "@/components/icons/VKIcon.vue";
           <a href="#team" class="text-1">Компетенции</a>
           <a href="#blog" class="text-1">Блог</a>
         </div>
-        <h1>+7 987 654 - 32 - 10</h1>
+        <h1><a href="tel:+79876543210">+7 987 654 - 32 - 10</a></h1>
         <a href="#" class="text-1">Политика конфиденциальности</a>
       </div>
     </section>
@@ -64,10 +108,16 @@ import VKIcon from "@/components/icons/VKIcon.vue";
   .logo {
     width: 495px;
     height: 105px;
+
+    cursor: pointer;
   }
 
   > h1 {
     text-transform: lowercase;
+
+    > a {
+      text-decoration: none;
+    }
   }
 
   > p {
@@ -84,6 +134,10 @@ import VKIcon from "@/components/icons/VKIcon.vue";
   > h1 {
     margin-top: 20px;
     margin-bottom: 30px;
+
+    > a {
+      text-decoration: none;
+    }
   }
 }
 
