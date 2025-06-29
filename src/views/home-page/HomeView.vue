@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from "vue";
+
 import PortfolioComponent from "@/views/home-page/components/PortfolioComponent.vue";
 import ServicesContainer from "@/views/home-page/components/ServicesContainer.vue";
 import ApplicationButton from "@/views/home-page/components/ApplicationButton.vue";
@@ -15,45 +17,55 @@ import GradientBackground5 from "@/assets/images/background5.png";
 import HelpCard from "@/views/home-page/components/HelpCard.vue";
 import Header from "@/components/header/HeaderComponent.vue";
 import Footer from "@/components/footer/FooterComponent.vue";
+import Menu from "@/components/menu/MenuComponent.vue";
+
+const isActiveMenu = ref(false);
+
+const toggleMenu = () => {
+  isActiveMenu.value = !isActiveMenu.value;
+};
 </script>
 
 <template>
-  <article
-    :style="{ backgroundImage: `url(${GradientBackground1})` }"
-    class="first-container"
-  >
-    <Header />
-    <VideoContainer />
-    <ServicesContainer />
-  </article>
-  <article
-    :style="{ backgroundImage: `url(${GradientBackground2})` }"
-    class="second-container"
-  >
-    <HelpCard />
-    <WorkProcess />
-    <PortfolioComponent />
-  </article>
-  <article
-    :style="{ backgroundImage: `url(${GradientBackground3})` }"
-    class="third-container"
-  >
-    <ApplicationButton />
-    <TeamSection />
-  </article>
-  <article
-    :style="{ backgroundImage: `url(${GradientBackground4})` }"
-    class="fourth-container"
-  >
-    <FeedbackSection />
-  </article>
-  <article
-    :style="{ backgroundImage: `url(${GradientBackground5})` }"
-    class="fifth-container"
-  >
-    <BlogSection />
-  </article>
-  <Footer />
+  <Menu v-if="isActiveMenu" :toggle-menu="toggleMenu" />
+  <main v-else>
+    <article
+      :style="{ backgroundImage: `url(${GradientBackground1})` }"
+      class="first-container"
+    >
+      <Header :toggle-menu="toggleMenu" />
+      <VideoContainer />
+      <ServicesContainer />
+    </article>
+    <article
+      :style="{ backgroundImage: `url(${GradientBackground2})` }"
+      class="second-container"
+    >
+      <HelpCard />
+      <WorkProcess />
+      <PortfolioComponent />
+    </article>
+    <article
+      :style="{ backgroundImage: `url(${GradientBackground3})` }"
+      class="third-container"
+    >
+      <ApplicationButton />
+      <TeamSection />
+    </article>
+    <article
+      :style="{ backgroundImage: `url(${GradientBackground4})` }"
+      class="fourth-container"
+    >
+      <FeedbackSection />
+    </article>
+    <article
+      :style="{ backgroundImage: `url(${GradientBackground5})` }"
+      class="fifth-container"
+    >
+      <BlogSection />
+    </article>
+    <Footer />
+  </main>
 </template>
 
 <style scoped lang="scss">

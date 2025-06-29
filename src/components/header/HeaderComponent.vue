@@ -1,18 +1,30 @@
 <script setup>
+import { useWindowWidth } from "@/hooks/useWindowWidth.js";
 import LogoIcon from "@/components/icons/LogoIcon.vue";
+import MenuIcon from "@/components/icons/MenuIcon.vue";
+
+const windowWidth = useWindowWidth();
+
+const props = defineProps({
+  toggleMenu: {
+    type: Function,
+    required: true,
+  },
+});
 </script>
 
 <template>
   <header class="page-container">
     <LogoIcon class="logo" />
-    <div class="header-links">
+    <div class="header-links" v-if="windowWidth > 1000">
       <a href="#services" class="text-1">Услуги</a>
       <a href="#processes" class="text-1">Этапы работы</a>
       <a href="#portfolio" class="text-1">Портфолио</a>
       <a href="#team" class="text-1">Компетенции</a>
       <a href="#blog" class="text-1">Блог</a>
     </div>
-    <a href="#feedback" class="text-1">Связаться</a>
+    <a href="#feedback" class="text-1" v-if="windowWidth > 1000">Связаться</a>
+    <MenuIcon class="menu-icon" @click="props.toggleMenu" v-else />
   </header>
 </template>
 
@@ -33,6 +45,10 @@ header {
   .logo {
     width: 115px;
     height: 35px;
+
+    @include variables.desktop {
+      height: 20px;
+    }
   }
 
   a {
@@ -66,5 +82,12 @@ header {
       box-shadow: 0 0 7px 0 map.get(variables.$color, white);
     }
   }
+}
+
+.menu-icon {
+  width: 30px;
+  height: 20px;
+
+  cursor: pointer;
 }
 </style>
