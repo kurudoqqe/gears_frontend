@@ -15,6 +15,10 @@ const props = defineProps({
     required: true,
   },
 });
+
+const goToLink = (url) => {
+  window.open(url);
+};
 </script>
 
 <template>
@@ -31,17 +35,57 @@ const props = defineProps({
       <a href="#blog" class="text-1" @click="toggleMenu">Блог</a>
     </div>
     <div class="connect">
-      <h1 class="number">+7 987 654 - 32 - 10</h1>
+      <h1 class="number">
+        <a href="tel:+79876543210">+7 987 654 - 32 - 10</a>
+      </h1>
       <div class="social-networks">
-        <TelegramIcon class="tg-icon" />
-        <InstagramIcon class="inst-icon" />
-        <VKIcon class="vk-icon" />
-        <YoutubeIcon class="yt-icon" />
-        <TikTokIcon class="tt-icon" />
-        <HabrIcon class="habr-icon" />
-        <RutubeIcon class="rutube-icon" />
+        <TelegramIcon
+          class="tg-icon"
+          @click="() => goToLink('https://t.me/by_gears')"
+        />
+        <InstagramIcon
+          class="inst-icon"
+          @click="
+            () =>
+              goToLink(
+                ' https://www.instagram.com/gears_programming?igsh=MWxyeW1iZnVrY2Exbw',
+              )
+          "
+        />
+        <VKIcon
+          class="vk-icon"
+          @click="() => goToLink('https://vk.com/gears.official')"
+        />
+        <YoutubeIcon
+          class="yt-icon"
+          @click="
+            () =>
+              goToLink(
+                'https://youtube.com/@gears.official?si=GRKvgnahQT0WdmLN',
+              )
+          "
+        />
+        <TikTokIcon
+          class="tt-icon"
+          @click="
+            () =>
+              goToLink(
+                'https://www.tiktok.com/@company.gears?_t=ZS-8xHtnaJER2W&_r=1',
+              )
+          "
+        />
+        <HabrIcon
+          class="habr-icon"
+          @click="() => goToLink('https://habr.com/ru/settings/others/')"
+        />
+        <RutubeIcon
+          class="rutube-icon"
+          @click="() => goToLink('https://rutube.ru/channel/56314948/')"
+        />
       </div>
-      <h1 class="mail">gears.team@mail.ru</h1>
+      <h1 class="mail">
+        <a href="mailto:gears.team@mail.ru">gears.team@mail.ru</a>
+      </h1>
     </div>
   </section>
 </template>
@@ -105,6 +149,12 @@ const props = defineProps({
   flex-direction: column;
   align-items: center;
   gap: 25px;
+
+  > h1 {
+    > a {
+      text-decoration: none;
+    }
+  }
 }
 
 .social-networks {
