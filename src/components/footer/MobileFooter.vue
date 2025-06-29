@@ -65,7 +65,7 @@ const goToLink = (url) => {
           />
           <HabrIcon
             class="habr-icon"
-            @click="() => goToLink('https://habr.com/ru/settings/others/')"
+            @click="() => goToLink('https://habr.com/ru/users/gears_official/')"
           />
           <RutubeIcon
             class="rutube-icon"
