@@ -6,12 +6,12 @@ import AlexandraImage from "@/assets/images/Alexandra.jpg";
 import ArrowIcon from "@/components/icons/ArrowIcon.vue";
 import ViktoriaImage from "@/assets/images/Viktoria.jpg";
 import VeronikaImage from "@/assets/images/Veronika.jpg";
+import MaximkaImage from "@/assets/images/Maximka.jpg";
 import KetrinImage from "@/assets/images/Ketrin.jpg";
 import VadimImage from "@/assets/images/Vadim.jpg";
 import IvanImage from "@/assets/images/Ivan.jpg";
 import AnnaImage from "@/assets/images/Anna.jpg";
 import OlegImage from "@/assets/images/Oleg.jpg";
-import MaximkaImage from "@/assets/images/Maximka.jpg";
 
 const teamContainer = ref(null);
 const showLeftArrow = ref(false);

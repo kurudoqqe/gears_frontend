@@ -47,7 +47,7 @@ const goToLink = (url) => {
             @click="
               () =>
                 goToLink(
-                  'https://youtube.com/@gears.official?si=GRKvgnahQT0WdmLN',
+                  'https://youtube.com/@gears.official.company?si=Nfwko9G3bOTaHhCI',
                 )
             "
           />
