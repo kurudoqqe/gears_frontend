@@ -1,8 +1,17 @@
 <script setup>
 import { onUnmounted, onMounted, ref } from "vue";
 
+import MaximTepinImage from "@/assets/images/Maxim Tepin.jpg";
+import AlexandraImage from "@/assets/images/Alexandra.jpg";
 import ArrowIcon from "@/components/icons/ArrowIcon.vue";
-import TeamMember from "@/assets/images/team.png";
+import ViktoriaImage from "@/assets/images/Viktoria.jpg";
+import VeronikaImage from "@/assets/images/Veronika.jpg";
+import KetrinImage from "@/assets/images/Ketrin.jpg";
+import VadimImage from "@/assets/images/Vadim.jpg";
+import IvanImage from "@/assets/images/Ivan.jpg";
+import AnnaImage from "@/assets/images/Anna.jpg";
+import OlegImage from "@/assets/images/Oleg.jpg";
+import MaximkaImage from "@/assets/images/Maximka.jpg";
 
 const teamContainer = ref(null);
 const showLeftArrow = ref(false);
@@ -55,63 +64,80 @@ onUnmounted(() => {
       />
       <div class="team" ref="teamContainer">
         <div class="member">
-          <img :src="TeamMember" alt="team-member" @dragstart.prevent />
+          <img :src="IvanImage" alt="team-member" @dragstart.prevent />
           <h2>Иван Ткачёв</h2>
-          <p class="text-1">Гений, миллиардер, плейбой, филантроп</p>
           <p class="text-1">
-            Lorem ipsum dolor sit amet consectetur. Augue dolor nunc tristique
-            gravida sit at condimentum. Tellus orci adipiscing porta elementum
-            id mollis.
+            Разработчик сервисов на Django / FastAPI и различных Telegram ботов
+            / MiniApp
           </p>
         </div>
         <div class="member">
-          <img :src="TeamMember" alt="team-member" @dragstart.prevent />
-          <h2>Иван Ткачёв</h2>
-          <p class="text-1">Гений, миллиардер, плейбой, филантроп</p>
+          <img :src="MaximTepinImage" alt="team-member" @dragstart.prevent />
+          <h2>Максим Тепин</h2>
           <p class="text-1">
-            Lorem ipsum dolor sit amet consectetur. Augue dolor nunc tristique
-            gravida sit at condimentum. Tellus orci adipiscing porta elementum
-            id mollis.
+            Backend разработчик, Project Manager, Product Manager
           </p>
         </div>
         <div class="member">
-          <img :src="TeamMember" alt="team-member" @dragstart.prevent />
-          <h2>Иван Ткачёв</h2>
-          <p class="text-1">Гений, миллиардер, плейбой, филантроп</p>
+          <img :src="KetrinImage" alt="team-member" @dragstart.prevent />
+          <h2>Екатерина Крутова</h2>
+          <p class="text-1">UI/UX дизайнер</p>
+        </div>
+        <div class="member">
+          <img :src="ViktoriaImage" alt="team-member" @dragstart.prevent />
+          <h2>Виктория Куленёнок</h2>
+          <p class="text-1">Digital-Маркетолог:</p>
           <p class="text-1">
-            Lorem ipsum dolor sit amet consectetur. Augue dolor nunc tristique
-            gravida sit at condimentum. Tellus orci adipiscing porta elementum
-            id mollis.
+            Разработка комплексных стратегий продвижения, Анализ ЦА и рынка
           </p>
         </div>
         <div class="member">
-          <img :src="TeamMember" alt="team-member" @dragstart.prevent />
-          <h2>Иван Ткачёв</h2>
-          <p class="text-1">Гений, миллиардер, плейбой, филантроп</p>
+          <img :src="OlegImage" alt="team-member" @dragstart.prevent />
+          <h2>Олег Репин</h2>
+          <p class="text-1">Frontend-разработка:</p>
           <p class="text-1">
-            Lorem ipsum dolor sit amet consectetur. Augue dolor nunc tristique
-            gravida sit at condimentum. Tellus orci adipiscing porta elementum
-            id mollis.
+            современные веб-решения, отвечающие потребностям пользователей и
+            бизнеса
           </p>
         </div>
         <div class="member">
-          <img :src="TeamMember" alt="team-member" @dragstart.prevent />
-          <h2>Иван Ткачёв</h2>
-          <p class="text-1">Гений, миллиардер, плейбой, филантроп</p>
+          <img :src="AnnaImage" alt="team-member" @dragstart.prevent />
+          <h2>Анна Данилюк</h2>
+          <p class="text-1">SMM специалист:</p>
           <p class="text-1">
-            Lorem ipsum dolor sit amet consectetur. Augue dolor nunc tristique
-            gravida sit at condimentum. Tellus orci adipiscing porta elementum
-            id mollis.
+            Производство контента: Посты, Stories, Reels, Визуал
           </p>
         </div>
         <div class="member">
-          <img :src="TeamMember" alt="team-member" @dragstart.prevent />
-          <h2>Иван Ткачёв</h2>
-          <p class="text-1">Гений, миллиардер, плейбой, филантроп</p>
+          <img :src="VeronikaImage" alt="team-member" @dragstart.prevent />
+          <h2>Вероника Попова</h2>
+          <p class="text-1">Reels Мейкер / Видеограф:</p>
           <p class="text-1">
-            Lorem ipsum dolor sit amet consectetur. Augue dolor nunc tristique
-            gravida sit at condimentum. Tellus orci adipiscing porta elementum
-            id mollis.
+            Reels, цепляющие с первых секунд, Видеопортфолио, Динамичный монтаж
+          </p>
+        </div>
+        <div class="member">
+          <img :src="AlexandraImage" alt="team-member" @dragstart.prevent />
+          <h2>Александра Поясок</h2>
+          <p class="text-1">
+            Дизайн и прототипирование: полный цикл проектирования в Figma
+          </p>
+        </div>
+        <div class="member">
+          <img :src="VadimImage" alt="team-member" @dragstart.prevent />
+          <h2>Вадим Киселёв</h2>
+          <p class="text-1">Frontend разработчик:</p>
+          <p class="text-1">
+            Разработка SPA и SSR-приложений, Оптимизация производительности и
+            SEO
+          </p>
+        </div>
+        <div class="member">
+          <img :src="MaximkaImage" alt="team-member" @dragstart.prevent />
+          <h2>Максим Григорьев</h2>
+          <p class="text-1">Backend Разработчик:</p>
+          <p class="text-1">
+            Разработка сервисов на FastAPI, Разработка Telegram ботов
           </p>
         </div>
       </div>
