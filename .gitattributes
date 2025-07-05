@@ -1,2 +1,4 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 /Users/vadim/WebstormProjects/gears_frontend/src/assets/videos/main-video.mp4
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.MOV filter=lfs diff=lfs merge=lfs -text
