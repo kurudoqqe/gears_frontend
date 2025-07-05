@@ -28,3 +28,7 @@ $page-width: (
     @content;
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

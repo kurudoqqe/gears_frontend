@@ -178,7 +178,6 @@ onUnmounted(() => {
 
   overflow-x: auto;
   overflow-y: hidden;
-
   scroll-behavior: smooth;
 }
 
@@ -194,6 +193,12 @@ onUnmounted(() => {
     width: 100%;
     height: 415px;
     object-fit: cover;
+
+    transition: transform 300ms;
+
+    &:hover {
+      transform: scale(1.075);
+    }
   }
 }
 
