@@ -48,7 +48,7 @@ const windowWidth = useWindowWidth();
         <Button class="feedback-button">Оставить заявку</Button>
         <p class="info text-1">
           * Нажимая на кнопку, я соглашаюсь на обработку персональных данных,
-          <br />
+          <br v-if="windowWidth > 500" />
           с публичной офертой
         </p>
       </div>
@@ -159,6 +159,11 @@ const windowWidth = useWindowWidth();
 
   @include variables.tablet {
     top: 120%;
+  }
+
+  @include variables.mobile {
+    font-size: 0.8rem;
+    text-align: center;
   }
 }
 </style>
