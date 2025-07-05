@@ -1,5 +1,6 @@
 <script setup>
 import Button from "@/components/button/ButtonComponent.vue";
+import MainVideo from "@/assets/videos/main-video.mp4";
 
 const jumpToFeedback = () => {
   const feedbackId = document.querySelector("#feedback");
@@ -9,7 +10,7 @@ const jumpToFeedback = () => {
 
 <template>
   <section class="video page-container">
-    <video controls />
+    <video controls :src="MainVideo" />
     <Button class="video-button text-1" @click="jumpToFeedback"
       >Заполнить заявку</Button
     >
