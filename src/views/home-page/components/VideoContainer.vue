@@ -10,7 +10,7 @@ const jumpToFeedback = () => {
 
 <template>
   <section class="video page-container">
-    <video controls :src="MainVideo" />
+    <video controls autoplay muted :src="MainVideo" />
     <Button class="video-button text-1" @click="jumpToFeedback"
       >Заполнить заявку</Button
     >
