@@ -1,54 +1,54 @@
 <script setup>
-import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+import CarAuctionPhoto from "@/assets/images/CarAuction.jpg";
 import Card from "@/components/card/CardComponent.vue";
-
-const windowWidth = useWindowWidth();
+import EasyLmsPhoto from "@/assets/images/easylms.png";
 </script>
 
 <template>
   <section class="portfolio page-container" id="portfolio">
     <h1>Портфолио</h1>
     <Card class="card">
-      <video controls />
+      <img :src="CarAuctionPhoto" alt="" @dragstart.prevent />
       <div class="project">
-        <h2>Telegram-бот "HR Helper"</h2>
+        <h2>Сервис для авторитейла</h2>
         <div class="description">
           <p class="text-1">
-            <b>Цель:</b> Автоматизировать рутинные HR-процессы и улучшить
-            взаимодействие с сотрудниками через Telegram
+            <b>Цель:</b> Создать прозрачную экосистему для работы на рынке
+            автомобилей с пробегом
           </p>
           <p class="text-1">
-            <b>Технологии:</b> Python (Aiogram), PostgreSQL, API-интеграции
+            <b>Технологии:</b> Python (Django), PostgreSQL, Docker, Celery,
+            Vue.js, SASS/SCSS, Axios
           </p>
           <p class="text-1">
-            <b>Функции:</b> Бот принимает заявки на отпуск и больничные, выдаёт
-            справки (2-НДФЛ, о стаже),...
+            <b>Функции:</b> Продажа авто | Покупка авто | Доставка из-за рубежа
+            | Заявка на техническое обслуживание
           </p>
         </div>
-        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>
+        <!--        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>-->
       </div>
     </Card>
     <Card class="card">
-      <video controls />
+      <img :src="EasyLmsPhoto" alt="" @dragstart.prevent />
       <div class="project">
-        <h2>Telegram-бот "HR Helper"</h2>
+        <h2>LMS система</h2>
         <div class="description">
           <p class="text-1">
-            <b>Цель:</b> Автоматизировать рутинные HR-процессы и улучшить
-            взаимодействие с сотрудниками через Telegram
+            <b>Цель:</b> Создать образовательную платформу для корпоративного
+            обучения
           </p>
           <p class="text-1">
-            <b>Технологии:</b> Python (Aiogram), PostgreSQL, API-интеграции
+            <b>Технологии:</b> Python (Django), Aiogram, PostgreSQL, Docker, S3,
+            React, Axios, Zod
           </p>
           <p class="text-1">
-            <b>Функции:</b> Бот принимает заявки на отпуск и больничные, выдаёт
-            справки (2-НДФЛ, о стаже),...
+            <b>Функции:</b> Создание курсов | Распространение | Продажа
           </p>
         </div>
-        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>
+        <!--        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>-->
       </div>
     </Card>
-    <p class="more text-1">Увидеть больше</p>
+    <!--    <p class="more text-1">Увидеть больше</p>-->
   </section>
 </template>
 
@@ -81,10 +81,12 @@ const windowWidth = useWindowWidth();
 
   padding: 1.25rem;
 
-  > video {
+  > video,
+  img {
     border: 2px solid map.get(variables.$color, white);
 
     width: 100%;
+    height: 270px;
 
     @include variables.mobile {
       aspect-ratio: 320/270;
