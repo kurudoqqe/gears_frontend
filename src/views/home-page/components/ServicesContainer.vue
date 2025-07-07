@@ -19,7 +19,7 @@ const cardsData = [
   {
     content: "Архитектура, сборка, DevOps (Docker, CI/CD)",
     title: "Микросервисы, MVP, Saas, CRM, LMS системы",
-    price: "от 99 900 руб.",
+    price: "от 99.900 руб.",
   },
   {
     title: "Одностраничный сайт",
