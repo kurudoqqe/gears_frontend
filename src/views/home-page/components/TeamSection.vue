@@ -58,7 +58,7 @@ onUnmounted(() => {
     <div class="team-wrapper">
       <ArrowIcon
         view="left"
-        class="arrow left-arrow"
+        class="arrow left-arrow hover"
         :class="{ visible: showLeftArrow }"
         @click="scrollLeft"
       />
@@ -66,17 +66,12 @@ onUnmounted(() => {
         <div class="member">
           <img :src="IvanImage" alt="team-member" @dragstart.prevent />
           <h2>Иван Ткачёв</h2>
-          <p class="text-1">
-            Разработчик сервисов на Django / FastAPI и различных Telegram ботов
-            / MiniApp
-          </p>
+          <p class="text-1">Team Lead, Backend разработчик, DevOps</p>
         </div>
         <div class="member">
           <img :src="MaximTepinImage" alt="team-member" @dragstart.prevent />
           <h2>Максим Тепин</h2>
-          <p class="text-1">
-            Backend разработчик, Project Manager, Product Manager
-          </p>
+          <p class="text-1">Backend разработчик, Project/Product Manager</p>
         </div>
         <div class="member">
           <img :src="KetrinImage" alt="team-member" @dragstart.prevent />
@@ -119,9 +114,7 @@ onUnmounted(() => {
         <div class="member">
           <img :src="AlexandraImage" alt="team-member" @dragstart.prevent />
           <h2>Александра Поясок</h2>
-          <p class="text-1">
-            Дизайн и прототипирование: полный цикл проектирования в Figma
-          </p>
+          <p class="text-1">Web Designer</p>
         </div>
         <div class="member">
           <img :src="VadimImage" alt="team-member" @dragstart.prevent />
@@ -143,7 +136,7 @@ onUnmounted(() => {
       </div>
       <ArrowIcon
         view="right"
-        class="arrow right-arrow"
+        class="arrow right-arrow hover"
         :class="{ visible: showRightArrow }"
         @click="scrollRight"
       />

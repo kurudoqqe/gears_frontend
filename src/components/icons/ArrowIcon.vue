@@ -41,7 +41,9 @@ svg {
   &.right {
     transform: rotateY(180deg);
   }
+}
 
+.hover {
   &:hover {
     background-color: rgba(map.get(variables.$color, white), 0.1);
     box-shadow: 0 0 7px 0 map.get(variables.$color, white);
