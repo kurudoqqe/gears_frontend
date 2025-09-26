@@ -468,10 +468,13 @@ onUnmounted(() => {
 
 .member-container {
   display: flex;
-
   position: relative;
-
   height: 550px;
+
+  @include variables.mobile {
+    flex-direction: column;
+    height: 1000px;
+  }
 }
 
 .member {
@@ -487,6 +490,10 @@ onUnmounted(() => {
   width: 370px;
 
   transition: transform 300ms;
+
+  @include variables.mobile {
+    height: 550px;
+  }
 
   &:hover {
     transform: scale(1.075);
