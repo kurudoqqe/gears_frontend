@@ -1,191 +1,94 @@
 <script setup>
-import { onUnmounted, onMounted, computed, ref } from "vue";
+import { computed, ref } from "vue";
 
 import CardComponent from "@/components/card/CardComponent.vue";
-import ArrowIcon from "@/components/icons/ArrowIcon.vue";
+import RobotIcon from "@/components/icons/RobotIcon.vue";
+import { servicesList } from "@/mocks/services.mock.js";
 
-const cardsData = [
-  {
-    content:
-      "Сайты, админки, личные кабинеты (Django, DRF, FastAPl, Vue/React)",
-    price: "от 49.990 руб.",
-    title: "Веб-разработка",
-  },
-  {
-    content: "UI/UX, брендирование, лендинги, презентации",
-    price: "от 19.990 руб.",
-    title: "Дизайн",
-  },
-  {
-    content: "Архитектура, сборка, DevOps (Docker, CI/CD)",
-    title: "Микросервисы, MVP, Saas, CRM, LMS системы",
-    price: "от 99.900 руб.",
-  },
-  {
-    title: "Одностраничный сайт",
-    price: "от 6.490 руб.",
-    content: "",
-  },
-  {
-    content:
-      "От простых до интегрированных с CRM, оплатой, воронками, аналитикой",
-    title: "Telegram-боты/miniapp",
-    price: "от 9.900 руб.",
-  },
-  {
-    content: "Скрипты, интеграции с АРl, парсеры, автозадачи",
-    price: "от 29.900 руб.",
-    title: "Автоматизация",
-  },
+const showAll = ref(false);
 
-  {
-    price: "Цена по договоренности",
-    title: "Доработка проектов",
-    content: "",
-  },
-  {
-    price: "Цена по договоренности",
-    title: "Сопровождение проектов",
-    content: "",
-  },
-  {
-    price: "Цена по договоренности",
-    title: "Продвижение продуктов",
-    content: "",
-  },
-  {
-    price: "от 1.500 руб.",
-    title: "Монтаж видео",
-    content: "",
-  },
-  {
-    price: "от 3.500 руб./час",
-    title: "Съёмка видео",
-    content: "",
-  },
-  {
-    title: "Продюсерские услуги под ключ",
-    price: "Цена по договоренности",
-    content: "",
-  },
-];
-
-const cardsPerPage = ref(3);
-const currentPage = ref(0);
-
-const totalPages = computed(() => {
-  return Math.ceil(cardsData.length / cardsPerPage.value);
+const displayedServices = computed(() => {
+  return showAll.value ? servicesList : servicesList.slice(0, 4);
 });
 
-const visibleCards = computed(() => {
-  const start = currentPage.value * cardsPerPage.value;
-  return cardsData.slice(start, start + cardsPerPage.value);
-});
-
-const toNextPage = () => {
-  currentPage.value = (currentPage.value + 1) % totalPages.value;
+const toggleShowAll = () => {
+  showAll.value = !showAll.value;
 };
-
-const toPrevPage = () => {
-  currentPage.value =
-    (currentPage.value - 1 + totalPages.value) % totalPages.value;
-};
-
-const handleResize = () => {
-  cardsPerPage.value = window.innerWidth < 768 ? 1 : 3;
-
-  if (currentPage.value >= totalPages.value) {
-    currentPage.value = Math.max(0, totalPages.value - 1);
-  }
-};
-
-onMounted(() => {
-  handleResize();
-  window.addEventListener("resize", handleResize);
-});
-
-onUnmounted(() => {
-  handleResize();
-  window.removeEventListener("resize", handleResize);
-});
 </script>
 
 <template>
   <section class="services page-container" id="services">
     <h1>Услуги и тарифы</h1>
-    <div class="card-container">
-      <ArrowIcon view="left" class="arrow" @click="toPrevPage" />
-      <div class="cards-wrapper">
-        <CardComponent
-          v-for="(card, index) in visibleCards"
-          :key="index"
-          class="card"
-        >
-          <h2>{{ card.title }}</h2>
-          <p class="text-1">
-            {{ card.content }}
-          </p>
-          <h2 class="card-price">{{ card.price }}</h2>
-        </CardComponent>
-      </div>
-      <ArrowIcon view="right" class="arrow" @click="toNextPage" />
+    <div class="services-container">
+      <CardComponent
+        class="service"
+        v-for="(service, index) in displayedServices"
+        :key="index"
+      >
+        <div class="service-icon">
+          <RobotIcon />
+        </div>
+        <div class="service-info">
+          <h2>{{ service.title }}</h2>
+          <p class="text-1">{{ service.content }}</p>
+          <h2>{{ service.price }}</h2>
+        </div>
+      </CardComponent>
     </div>
+    <p class="text-1 show-more" @click="toggleShowAll">
+      {{ showAll ? "Скрыть" : "Увидеть больше" }}
+    </p>
   </section>
 </template>
 
-<style scoped lang="scss">
-@use "@/assets/global/variables";
-
+<style scoped>
 .services {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  margin: 0 auto;
 
-  @include variables.mobile {
-    gap: 40px;
-  }
+  margin: 200px auto 0;
 }
 
-.card-container {
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 10px;
+}
+
+.service {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 30px;
+
+  padding: 2rem 1.8rem;
 }
 
-.cards-wrapper {
-  display: flex;
-  gap: 20px;
-  flex: 1;
-  justify-content: center;
-
-  min-height: 360px;
+.service-icon {
+  min-width: 125px;
+  min-height: 100px;
 }
 
-.arrow {
-  width: 100%;
-  height: fit-content;
-  max-width: 32px;
-  min-height: 50px;
-
-  user-select: none;
-  cursor: pointer;
-}
-
-.card {
+.service-info {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  flex: 1;
+  gap: 10px;
+}
 
-  padding: 2.25rem;
+.show-more {
+  width: fit-content;
 
-  word-break: break-word;
+  margin: 0 auto;
 
-  .card-price {
-    align-self: end;
+  text-decoration: underline;
+  opacity: 0.8;
 
-    margin-top: auto;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
   }
 }
 </style>
