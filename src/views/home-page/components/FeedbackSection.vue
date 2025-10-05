@@ -1,10 +1,41 @@
 <script setup>
+import { ref } from "vue";
+
 import CheckboxInput from "@/components/input/CheckboxInput.vue";
 import Button from "@/components/button/ButtonComponent.vue";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
 import TextInput from "@/components/input/TextInput.vue";
+import { sendRequest } from "@/api/request.js";
 
 const windowWidth = useWindowWidth();
+
+const formData = ref({
+  contacts: {
+    telegram: false,
+    whatsapp: false,
+    phone: false,
+  },
+  question: "",
+  phone: "",
+  fio: "",
+});
+
+const sendFeedback = () => {
+  const contactsArray = [];
+  if (formData.value.contacts.telegram) contactsArray.push("Telegram");
+  if (formData.value.contacts.whatsapp) contactsArray.push("Whatsapp");
+  if (formData.value.contacts.phone) contactsArray.push("Телефон");
+
+  const requestData = {
+    ...formData.value,
+    question: formData.value.question,
+    phone: formData.value.phone,
+    contacts: contactsArray,
+    fio: formData.value.fio,
+  };
+
+  sendRequest(requestData);
+};
 </script>
 
 <template>
@@ -13,39 +44,42 @@ const windowWidth = useWindowWidth();
     <div class="feedback-container">
       <div class="feedback-input">
         <div class="checkbox-container" v-if="windowWidth > 750">
-          <CheckboxInput>
+          <CheckboxInput v-model="formData.contacts.phone">
             <p>Телефон</p>
           </CheckboxInput>
-          <CheckboxInput>
+          <CheckboxInput v-model="formData.contacts.telegram">
             <p class="text-1">Telegram</p>
           </CheckboxInput>
-          <CheckboxInput>
+          <CheckboxInput v-model="formData.contacts.whatsapp">
             <p class="text-1">Whatsapp</p>
           </CheckboxInput>
         </div>
         <div class="input-container">
-          <TextInput placeholder="фио *" />
-          <TextInput placeholder="телефон *" />
+          <TextInput v-model="formData.fio" placeholder="фио *" />
+          <TextInput v-model="formData.phone" placeholder="телефон *" />
           <TextInput
+            v-model="formData.question"
             placeholder="напишите свой вопрос, чтобы мы смогли провести подробную консультацию"
             class="textarea"
             textarea
           />
         </div>
         <div class="checkbox-container" v-if="windowWidth <= 750">
-          <CheckboxInput>
+          <CheckboxInput v-model="formData.contacts.phone">
             <p class="text-1">Телефон</p>
           </CheckboxInput>
-          <CheckboxInput>
+          <CheckboxInput v-model="formData.contacts.telegram">
             <p class="text-1">Telegram</p>
           </CheckboxInput>
-          <CheckboxInput>
+          <CheckboxInput v-model="formData.contacts.whatsapp">
             <p class="text-1">Whatsapp</p>
           </CheckboxInput>
         </div>
       </div>
       <div class="button-container">
-        <Button class="feedback-button">Оставить заявку</Button>
+        <Button class="feedback-button" @click="sendFeedback"
+          >Оставить заявку</Button
+        >
         <p class="info text-1">
           * Нажимая на кнопку, я соглашаюсь на обработку персональных данных,
           <br v-if="windowWidth > 500" />
