@@ -1,19 +1,26 @@
 <script setup>
-import { computed, ref } from "vue";
+import { onMounted, computed, ref } from "vue";
 
 import CardComponent from "@/components/card/CardComponent.vue";
 import RobotIcon from "@/components/icons/RobotIcon.vue";
-import { servicesList } from "@/mocks/services.mock.js";
+import { getServices } from "@/api/services.js";
 
 const showAll = ref(false);
+const servicesList = ref([]);
 
 const displayedServices = computed(() => {
-  return showAll.value ? servicesList : servicesList.slice(0, 4);
+  return showAll.value ? servicesList : servicesList.value.slice(0, 4);
 });
 
 const toggleShowAll = () => {
   showAll.value = !showAll.value;
 };
+
+onMounted(async () => {
+  await getServices()
+    .then((res) => (servicesList.value = res))
+    .catch((err) => console.log(err));
+});
 </script>
 
 <template>
