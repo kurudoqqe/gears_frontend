@@ -1,29 +1,55 @@
 <script setup>
+import { computed, ref } from "vue";
+
+import BlogPagination from "@/views/home-page/components/BlogPagination.vue";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
-import SecondVideo from "@/assets/videos/blog2.MOV";
-import FirstVideo from "@/assets/videos/blog1.mov";
-import ThirdVideo from "@/assets/videos/blog3.mov";
 
 const windowWidth = useWindowWidth();
+
+const currentPage = ref(1);
+const videosData = ref([]);
+
+const videosPerPage = computed(() => {
+  if (windowWidth.value > 1100) return 4;
+  if (windowWidth.value > 750) return 3;
+  return 2;
+});
+
+const displayedVideos = computed(() => {
+  const startIndex = (currentPage.value - 1) * videosPerPage.value;
+  const endIndex = startIndex + videosPerPage.value;
+  return videosData.value.slice(startIndex, endIndex);
+});
+
+const totalPages = computed(() => {
+  return Math.ceil(videosData.value.length / videosPerPage.value);
+});
+
+const handlePageChange = (page) => {
+  currentPage.value = page;
+};
 </script>
 
 <template>
-  <section class="blog page-container" id="blog">
+  <section class="blog page-container" id="blog" v-if="videosData.length > 0">
     <h1>Блог</h1>
     <div class="blog-content">
-      <div class="blog-video">
-        <video controls :src="ThirdVideo" />
-        <p class="text-2">Узнаем у людей на улице, кто из них в ИТ</p>
-      </div>
-      <div class="blog-video">
-        <video controls :src="FirstVideo" />
-        <p class="text-2">Подкаст “Как стартануть в IT в 2025”</p>
-      </div>
-      <div class="blog-video" v-if="windowWidth > 750">
-        <video controls :src="SecondVideo" />
-        <p class="text-2">Наш курс по разработке Telegram-ботов</p>
+      <div
+        v-for="(video, index) in displayedVideos"
+        :key="index"
+        class="blog-video"
+      >
+        <video controls :src="video.src" />
+        <p class="text-2">{{ video.title }}</p>
       </div>
     </div>
+
+    <BlogPagination
+      v-if="totalPages > 1"
+      :current-page="currentPage"
+      :total-pages="totalPages"
+      @page-change="handlePageChange"
+    />
   </section>
 </template>
 
@@ -35,7 +61,6 @@ const windowWidth = useWindowWidth();
   display: flex;
   flex-direction: column;
   gap: 50px;
-
   margin: 0 auto;
 }
 
@@ -54,6 +79,7 @@ const windowWidth = useWindowWidth();
   @media (max-width: 650px) {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -61,13 +87,13 @@ const windowWidth = useWindowWidth();
   display: flex;
   flex-direction: column;
   gap: 15px;
-
   width: 280px;
 
   > video {
     border: 1px solid map.get(variables.$color, white);
-
     height: 280px;
+    width: 100%;
+    object-fit: cover;
   }
 
   @include variables.desktop {
@@ -75,7 +101,18 @@ const windowWidth = useWindowWidth();
   }
 
   @media (max-width: 650px) {
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
+
+    > video {
+      height: 250px;
+    }
   }
+}
+
+.text-2 {
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
 }
 </style>

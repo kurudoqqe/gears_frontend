@@ -24,7 +24,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="services page-container" id="services">
+  <section
+    class="services page-container"
+    id="services"
+    v-if="servicesList.length > 0"
+  >
     <h1>Услуги и тарифы</h1>
     <div class="services-container">
       <CardComponent
