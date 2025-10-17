@@ -70,6 +70,7 @@ header {
     padding: 0.25rem 1.25rem;
 
     text-decoration: none;
+    font-weight: 400;
 
     border-radius: 20px;
     transition:

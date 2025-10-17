@@ -9,6 +9,10 @@ const props = defineProps({
     required: false,
     type: String,
   },
+  isError: {
+    required: false,
+    type: Boolean,
+  },
 });
 
 const model = defineModel();
@@ -21,6 +25,7 @@ const model = defineModel();
     v-bind="props"
     v-model="model"
     :placeholder="props.placeholder"
+    :class="{ error: isError }"
   ></textarea>
   <input
     v-else
@@ -29,6 +34,7 @@ const model = defineModel();
     v-bind="props"
     v-model="model"
     :placeholder="props.placeholder"
+    :class="{ error: isError }"
   />
 </template>
 
@@ -43,7 +49,7 @@ const model = defineModel();
   background-color: transparent;
   outline: none;
 
-  transition: background-color 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 
   &:hover,
   &:focus {
@@ -54,10 +60,12 @@ const model = defineModel();
     color: map.get(variables.$color, white);
     font-family: Roboto, sans-serif;
     font-size: 1rem;
+    line-height: 26px;
 
     @include variables.mobile {
-      font-weight: 300;
       display: none;
+      line-height: normal;
+      font-weight: 300;
     }
   }
 
@@ -69,6 +77,10 @@ const model = defineModel();
 
   &.textarea {
     resize: none;
+  }
+
+  &.error {
+    border-color: map.get(variables.$color, error);
   }
 }
 </style>

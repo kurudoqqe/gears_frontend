@@ -20,11 +20,25 @@ const formData = ref({
   fio: "",
 });
 
+const errors = ref({
+  question: false,
+  phone: false,
+  fio: false,
+});
+
 const sendFeedback = () => {
   const contactsArray = [];
   if (formData.value.contacts.telegram) contactsArray.push("Telegram");
   if (formData.value.contacts.whatsapp) contactsArray.push("Whatsapp");
   if (formData.value.contacts.phone) contactsArray.push("Телефон");
+
+  errors.value.question = formData.value.question === "";
+  errors.value.phone = formData.value.phone === "";
+  errors.value.fio = formData.value.fio === "";
+
+  if (errors.value.phone || errors.value.fio || errors.value.question) {
+    return null;
+  }
 
   const requestData = {
     ...formData.value,
@@ -45,7 +59,7 @@ const sendFeedback = () => {
       <div class="feedback-input">
         <div class="checkbox-container" v-if="windowWidth > 750">
           <CheckboxInput v-model="formData.contacts.phone">
-            <p>Телефон</p>
+            <p class="text-1">Телефон</p>
           </CheckboxInput>
           <CheckboxInput v-model="formData.contacts.telegram">
             <p class="text-1">Telegram</p>
@@ -55,13 +69,22 @@ const sendFeedback = () => {
           </CheckboxInput>
         </div>
         <div class="input-container">
-          <TextInput v-model="formData.fio" placeholder="фио *" />
-          <TextInput v-model="formData.phone" placeholder="телефон *" />
+          <TextInput
+            v-model="formData.fio"
+            placeholder="ФИО *"
+            :is-error="errors.fio"
+          />
+          <TextInput
+            v-model="formData.phone"
+            placeholder="Телефон *"
+            :is-error="errors.phone"
+          />
           <TextInput
             v-model="formData.question"
-            placeholder="напишите свой вопрос, чтобы мы смогли провести подробную консультацию"
+            placeholder="Напишите свой вопрос, чтобы мы смогли провести подробную консультацию"
             class="textarea"
             textarea
+            :is-error="errors.question"
           />
         </div>
         <div class="checkbox-container" v-if="windowWidth <= 750">
@@ -82,7 +105,7 @@ const sendFeedback = () => {
         >
         <p class="info text-1">
           * Нажимая на кнопку, я соглашаюсь на обработку персональных данных,
-          <br v-if="windowWidth > 500" />
+          <br v-if="windowWidth > 1200" />
           с публичной офертой
         </p>
       </div>
@@ -93,6 +116,8 @@ const sendFeedback = () => {
 <style scoped lang="scss">
 @use "@/assets/global/variables";
 @use "sass:map";
+
+$desktop-width: 1200px;
 
 .feedback {
   display: flex;
@@ -189,7 +214,12 @@ const sendFeedback = () => {
 
 .info {
   position: absolute;
+  white-space: nowrap;
   top: 105%;
+
+  @media (max-width: $desktop-width) {
+    white-space: normal;
+  }
 
   @include variables.tablet {
     top: 120%;
