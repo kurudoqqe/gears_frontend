@@ -2,13 +2,9 @@
 import GradientBackground from "@/assets/images/card-background.png";
 import Button from "@/components/button/ButtonComponent.vue";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+import { jumpToSection } from "@/utils.js";
 
 const windowWidth = useWindowWidth();
-
-const jumpToFeedback = () => {
-  const feedbackId = document.querySelector("#feedback");
-  window.scrollTo(0, feedbackId.offsetTop - 125);
-};
 </script>
 
 <template>
@@ -20,7 +16,7 @@ const jumpToFeedback = () => {
       не знаете <br v-if="windowWidth <= 500" />
       что выбрать?
     </h1>
-    <Button class="help-button text-1" @click="jumpToFeedback">
+    <Button class="help-button text-1" @click="jumpToSection()">
       Заполните заявку
     </Button>
     <p class="text-1">и мы вам подскажем</p>

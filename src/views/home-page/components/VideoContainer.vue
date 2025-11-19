@@ -1,17 +1,13 @@
 <script setup>
 import Button from "@/components/button/ButtonComponent.vue";
 import MainVideo from "@/assets/videos/main-video.mp4";
-
-const jumpToFeedback = () => {
-  const feedbackId = document.querySelector("#feedback");
-  window.scrollTo(0, feedbackId.offsetTop - 125);
-};
+import { jumpToSection } from "@/utils.js";
 </script>
 
 <template>
   <section class="video page-container">
     <video controls autoplay muted :src="MainVideo" />
-    <Button class="video-button text-1" @click="jumpToFeedback"
+    <Button class="video-button text-1" @click="jumpToSection('feedback')"
       >Заполнить заявку</Button
     >
   </section>
