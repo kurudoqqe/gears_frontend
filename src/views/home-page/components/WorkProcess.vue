@@ -1,71 +1,41 @@
-<script setup></script>
+<script setup>
+import { workProcesses } from "@/mocks/workProcesses.mock.js";
+import ArrowRight from "@/assets/images/arrow-right.png";
+import ArrowLeft from "@/assets/images/arrow-left.png";
+</script>
 
 <template>
   <section class="work-process page-container" id="processes">
     <h1>процесс работы</h1>
     <div class="processes">
-      <div class="work first">
-        <h2>Составление технического задания</h2>
-        <p class="text-2">
-          Определяются требования к функционалу, интерфейсу и архитектуре.
-          <br />
-          Собираются пожелания заказчика, анализируются потребности <br />
-          пользователей, выбирается MVP и стек технологий
-        </p>
-      </div>
-      <div class="work second">
-        <h2>Планирование</h2>
-        <p class="text-2">
-          Проект разбивается на этапы или спринты <br />
-          (Agile). Оцениваются сроки, бюджет, <br />
-          распределяются роли. Настраиваются <br />
-          инструменты (Jira, Trello) для отслеживания <br />
-          прогресса
-        </p>
-      </div>
-      <div class="work third">
-        <h2>Дизайн</h2>
-        <p class="text-2">
-          Создаются прототипы и вайрфреймы, после <br />
-          согласования разрабатывается UI/UX (цвета, <br />
-          шрифты, анимации). Готовые макеты передаются <br />
-          фронтенду
-        </p>
-      </div>
-      <div class="work fourth">
-        <h2>Вёрстка и API</h2>
-        <p class="text-2">
-          Фронтенд верстает интерфейс, бэкенд <br />
-          разрабатывает API и базы данных. <br />
-          Обеспечивается безопасность и клиентская <br />
-          логика
-        </p>
-      </div>
-      <div class="work fifth">
-        <h2>Совмещение модулей</h2>
-        <p class="text-2">
-          Фронтенд и бэкенд соединяются через API. <br />
-          Проверяется корректность запросов, <br />
-          передача данных и работа функций
-        </p>
-      </div>
-      <div class="work sixth">
-        <h2>Тестирование</h2>
-        <p class="text-2">
-          Тестировщики проверяют систему: ищут баги, тестируют <br />
-          безопасность и нагрузку. Проводят тесты с <br />
-          пользователями (UAT), фиксируют и исправляют все <br />
-          ошибки перед выпуском
-        </p>
-      </div>
-      <div class="work seventh">
-        <h2>Деплой</h2>
-        <p class="text-2">
-          Продукт разворачивается на серверах. <br />
-          Настраивается веб-сервер, базы данных, домены, <br />
-          SSL. Мониторится стабильность, готовится <br />
-          документация
-        </p>
+      <div
+        v-for="(process, index) in workProcesses"
+        :key="index"
+        class="work"
+        :class="`work-${process.alignment}`"
+      >
+        <div
+          class="work-content"
+          :class="`${process.width ? process.width : ''}`"
+        >
+          <img
+            :src="process.image"
+            :alt="++index"
+            class="work-number"
+            @dragstart.prevent
+          />
+          <div class="process-description">
+            <h2>{{ process.title }}</h2>
+            <p class="text-2">{{ process.description }}</p>
+          </div>
+        </div>
+        <img
+          v-if="index < workProcesses.length"
+          :src="index % 2 ? ArrowRight : ArrowLeft"
+          alt="arrow"
+          class="work-arrow"
+          :class="workProcesses.length === ++index ? 'last' : undefined"
+        />
       </div>
     </div>
   </section>
@@ -78,7 +48,6 @@
   display: flex;
   flex-direction: column;
   gap: 50px;
-
   margin: 200px auto 0;
 
   @include variables.mobile {
@@ -89,74 +58,71 @@
 .processes {
   display: flex;
   flex-direction: column;
-  gap: 60px;
-
-  @include variables.tablet {
-    gap: 50px;
-  }
+  gap: 80px;
 }
 
 .work {
   display: flex;
+  gap: 25px;
+
+  &-left {
+    margin-top: 20px;
+  }
+
+  &-right {
+    flex-direction: row-reverse;
+    align-self: end;
+
+    > h2 {
+      align-self: end;
+    }
+  }
+}
+
+.work-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  max-width: 600px;
+
+  &.small {
+    max-width: 530px;
+  }
+
+  &.medium {
+    max-width: 600px;
+  }
+
+  &.large {
+    max-width: 630px;
+  }
+}
+
+.work-number {
+  max-height: 100px;
+  width: fit-content;
+}
+
+.work-arrow {
+  max-height: 100px;
+  width: 100%;
+
+  transform: translateY(75px);
+
+  &.last {
+    max-width: 215px;
+  }
+}
+
+.process-description {
+  display: flex;
   flex-direction: column;
   gap: 15px;
 
-  &.second {
-    align-self: end;
+  width: 475px;
 
-    > h2 {
-      align-self: end;
-    }
-
-    .text-2 {
-      text-align: end;
-    }
-  }
-
-  &.third {
-    margin-left: 80px;
-
-    @include variables.tablet {
-      margin: 0;
-    }
-  }
-
-  &.fourth {
-    align-self: end;
-
-    margin-right: 160px;
-
-    > h2 {
-      align-self: end;
-    }
-
-    .text-2 {
-      text-align: end;
-    }
-
-    @include variables.tablet {
-      margin: 0;
-    }
-  }
-
-  &.sixth {
-    align-self: end;
-
-    > h2 {
-      align-self: end;
-    }
-
-    .text-2 {
-      text-align: end;
-    }
-  }
-
-  &.seventh {
-    margin-left: 200px;
-
-    @include variables.tablet {
-      margin: 0;
-    }
-  }
+  text-align: justify;
+  line-height: 100%;
 }
 </style>
