@@ -156,7 +156,7 @@ $desktop-width: 1200px;
 
 .feedback-button {
   width: 100%;
-  height: 130px;
+  height: 80px;
 
   padding: 1rem 1.25rem;
 
