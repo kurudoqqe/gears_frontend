@@ -3,13 +3,13 @@ import { onMounted, computed, ref } from "vue";
 
 import CardComponent from "@/components/card/CardComponent.vue";
 import RobotIcon from "@/components/icons/RobotIcon.vue";
-import { getServices } from "@/api/services.js";
+import { services } from "@/mocks/services.mock.js";
 
 const showAll = ref(false);
 const servicesList = ref([]);
 
 const displayedServices = computed(() => {
-  return showAll.value ? servicesList : servicesList.value.slice(0, 4);
+  return showAll.value ? servicesList.value : servicesList.value.slice(0, 4);
 });
 
 const toggleShowAll = () => {
@@ -17,9 +17,10 @@ const toggleShowAll = () => {
 };
 
 onMounted(async () => {
-  await getServices()
-    .then((res) => (servicesList.value = res))
-    .catch((err) => console.log(err));
+  // await getServices()
+  //   .then((res) => (servicesList.value = res))
+  //   .catch((err) => console.log(err));
+  servicesList.value = services;
 });
 </script>
 
@@ -46,7 +47,11 @@ onMounted(async () => {
         </div>
       </CardComponent>
     </div>
-    <p class="text-1 show-more" @click="toggleShowAll">
+    <p
+      class="text-1 show-more"
+      @click="toggleShowAll"
+      v-if="servicesList.length > 4"
+    >
       {{ showAll ? "Скрыть" : "Увидеть больше" }}
     </p>
   </section>
@@ -62,18 +67,16 @@ onMounted(async () => {
 }
 
 .services-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 20px;
-  row-gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .service {
   display: flex;
-  align-items: center;
   gap: 30px;
 
-  padding: 2rem 1.8rem;
+  padding: 1.5rem 2rem;
 }
 
 .service-icon {
@@ -82,6 +85,8 @@ onMounted(async () => {
 }
 
 .service-info {
+  align-self: center;
+
   display: flex;
   flex-direction: column;
   gap: 10px;

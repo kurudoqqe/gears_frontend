@@ -1,4 +1,4 @@
-export const servicesList = [
+export const services = [
   {
     content:
       "Сайты, админки, личные кабинеты (Django, DRF, FastAPl, Vue/React)",
