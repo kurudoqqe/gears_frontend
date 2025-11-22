@@ -3,7 +3,7 @@ import { onMounted, computed, watch, ref } from "vue";
 
 import BlogPagination from "@/views/home-page/components/BlogPagination.vue";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
-import { getBlocksPage } from "@/api/blog.js";
+import { blogVideos } from "@/mocks/blog.mock.js";
 
 const windowWidth = useWindowWidth();
 
@@ -28,10 +28,12 @@ const handlePageChange = (page) => {
 };
 
 onMounted(async () => {
-  await getBlocksPage(1).then((res) => {
-    videosData.value = res.data.posts;
-    totalPages.value = res.data.total_pages;
-  });
+  // await getBlocksPage(1).then((res) => {
+  //   videosData.value = res.data.posts;
+  //   totalPages.value = res.data.total_pages;
+  // });
+  videosData.value = blogVideos;
+  totalPages.value = 4;
 });
 
 watch(currentPage.value, () => {});
