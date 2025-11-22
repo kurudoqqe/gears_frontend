@@ -1,54 +1,50 @@
 <script setup>
-import CarAuctionPhoto from "@/assets/images/CarAuction.jpg";
+import { onMounted, computed, ref } from "vue";
+
 import Card from "@/components/card/CardComponent.vue";
-import EasyLmsPhoto from "@/assets/images/easylms.png";
+import { portfolios } from "@/mocks/portfolio.mock.js";
+
+const portfolioList = ref([]);
+const showAll = ref(false);
+
+const displayedPortfolios = computed(() => {
+  return showAll.value ? portfolioList.value : portfolioList.value.slice(0, 2);
+});
+
+const toggleShowAll = () => {
+  showAll.value = !showAll.value;
+};
+
+onMounted(() => {
+  portfolioList.value = portfolios;
+});
 </script>
 
 <template>
   <section class="portfolio page-container" id="portfolio">
     <h1>Портфолио</h1>
-    <Card class="card">
-      <img :src="CarAuctionPhoto" alt="" @dragstart.prevent />
+    <Card
+      class="card"
+      v-for="(portfolio, index) in displayedPortfolios"
+      :key="index"
+    >
+      <img :src="portfolio.photo" alt="" @dragstart.prevent />
       <div class="project">
-        <h2>Сервис для авторитейла</h2>
+        <h2>{{ portfolio.title }}</h2>
         <div class="description">
-          <p class="text-1">
-            <b>Цель:</b> Создать прозрачную экосистему для работы на рынке
-            автомобилей с пробегом
-          </p>
-          <p class="text-1">
-            <b>Технологии:</b> Python (Django), PostgreSQL, Docker, Celery,
-            Vue.js, SASS/SCSS, Axios
-          </p>
-          <p class="text-1">
-            <b>Функции:</b> Продажа авто | Покупка авто | Доставка из-за рубежа
-            | Заявка на техническое обслуживание
-          </p>
+          <p class="text-1"><b>Цель:</b> {{ portfolio.purpose }}</p>
+          <p class="text-1"><b>Технологии:</b> {{ portfolio.technologies }}</p>
+          <p class="text-1"><b>Функции:</b> {{ portfolio.functions }}</p>
         </div>
-        <!--        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>-->
       </div>
     </Card>
-    <Card class="card">
-      <img :src="EasyLmsPhoto" alt="" @dragstart.prevent />
-      <div class="project">
-        <h2>LMS система</h2>
-        <div class="description">
-          <p class="text-1">
-            <b>Цель:</b> Создать образовательную платформу для корпоративного
-            обучения
-          </p>
-          <p class="text-1">
-            <b>Технологии:</b> Python (Django), Aiogram, PostgreSQL, Docker, S3,
-            React, Axios, Zod
-          </p>
-          <p class="text-1">
-            <b>Функции:</b> Создание курсов | Распространение | Продажа
-          </p>
-        </div>
-        <!--        <p class="more text-1" v-if="windowWidth <= 500">Увидеть все</p>-->
-      </div>
-    </Card>
-    <!--    <p class="more text-1">Увидеть больше</p>-->
+    <p
+      class="more text-1"
+      @click="toggleShowAll"
+      v-if="portfolioList.length > 2"
+    >
+      {{ !showAll ? "Увидеть больше" : "Скрыть" }}
+    </p>
   </section>
 </template>
 
@@ -79,6 +75,8 @@ import EasyLmsPhoto from "@/assets/images/easylms.png";
   gap: 20px;
   flex-direction: row-reverse;
 
+  overflow: hidden;
+
   padding: 1.25rem;
 
   > video,
@@ -99,10 +97,6 @@ import EasyLmsPhoto from "@/assets/images/easylms.png";
     @include variables.tablet {
       flex-direction: column;
     }
-  }
-
-  @include variables.tablet {
-    flex-direction: column;
   }
 }
 
@@ -125,8 +119,6 @@ import EasyLmsPhoto from "@/assets/images/easylms.png";
 
   height: 100%;
 
-  padding: 0 0.75rem;
-
   b {
     font-weight: 600;
   }
@@ -134,6 +126,14 @@ import EasyLmsPhoto from "@/assets/images/easylms.png";
   @include variables.tablet {
     justify-content: normal;
     gap: 10px;
+  }
+
+  > p.text-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 
