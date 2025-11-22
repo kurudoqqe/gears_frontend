@@ -35,6 +35,7 @@ import ArrowLeft from "@/assets/images/arrow-left.png";
           alt="arrow"
           class="work-arrow"
           :class="workProcesses.length === ++index ? 'last' : undefined"
+          @dragstart.prevent
         />
       </div>
     </div>
