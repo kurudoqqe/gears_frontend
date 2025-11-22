@@ -1,13 +1,10 @@
 <script setup>
 import { ref } from "vue";
 
-import CheckboxInput from "@/components/input/CheckboxInput.vue";
-import Button from "@/components/button/ButtonComponent.vue";
-import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+import ButtonComponent from "@/components/button/ButtonComponent.vue";
 import TextInput from "@/components/input/TextInput.vue";
-import { sendRequest } from "@/api/request.js";
 
-const windowWidth = useWindowWidth();
+// const windowWidth = useWindowWidth();
 
 const formData = ref({
   contacts: {
@@ -26,87 +23,64 @@ const errors = ref({
   fio: false,
 });
 
-const sendFeedback = () => {
-  const contactsArray = [];
-  if (formData.value.contacts.telegram) contactsArray.push("Telegram");
-  if (formData.value.contacts.whatsapp) contactsArray.push("Whatsapp");
-  if (formData.value.contacts.phone) contactsArray.push("Телефон");
-
-  errors.value.question = formData.value.question === "";
-  errors.value.phone = formData.value.phone === "";
-  errors.value.fio = formData.value.fio === "";
-
-  if (errors.value.phone || errors.value.fio || errors.value.question) {
-    return null;
-  }
-
-  const requestData = {
-    ...formData.value,
-    question: formData.value.question,
-    phone: formData.value.phone,
-    contacts: contactsArray,
-    fio: formData.value.fio,
-  };
-
-  sendRequest(requestData);
-};
+// const sendFeedback = () => {
+//   const contactsArray = [];
+//   if (formData.value.contacts.telegram) contactsArray.push("Telegram");
+//   if (formData.value.contacts.whatsapp) contactsArray.push("Whatsapp");
+//   if (formData.value.contacts.phone) contactsArray.push("Телефон");
+//
+//   errors.value.question = formData.value.question === "";
+//   errors.value.phone = formData.value.phone === "";
+//   errors.value.fio = formData.value.fio === "";
+//
+//   if (errors.value.phone || errors.value.fio || errors.value.question) {
+//     return null;
+//   }
+//
+//   const requestData = {
+//     ...formData.value,
+//     question: formData.value.question,
+//     phone: formData.value.phone,
+//     contacts: contactsArray,
+//     fio: formData.value.fio,
+//   };
+//
+//   sendRequest(requestData);
+// };
 </script>
 
 <template>
   <section class="feedback page-container" id="feedback">
-    <h1>Оставьте заявку и мы свяжемся с вами</h1>
+    <h1>Оставьте заявку и мы сразу свяжемся с вами</h1>
     <div class="feedback-container">
       <div class="feedback-input">
-        <div class="checkbox-container" v-if="windowWidth > 750">
-          <CheckboxInput v-model="formData.contacts.phone">
-            <p class="text-1">Телефон</p>
-          </CheckboxInput>
-          <CheckboxInput v-model="formData.contacts.telegram">
-            <p class="text-1">Telegram</p>
-          </CheckboxInput>
-          <CheckboxInput v-model="formData.contacts.whatsapp">
-            <p class="text-1">Whatsapp</p>
-          </CheckboxInput>
-        </div>
-        <div class="input-container">
-          <TextInput
-            v-model="formData.fio"
-            placeholder="ФИО *"
-            :is-error="errors.fio"
-          />
-          <TextInput
-            v-model="formData.phone"
-            placeholder="Телефон *"
-            :is-error="errors.phone"
-          />
-          <TextInput
-            v-model="formData.question"
-            placeholder="Напишите свой вопрос, чтобы мы смогли провести подробную консультацию"
-            class="textarea"
-            textarea
-            :is-error="errors.question"
-          />
-        </div>
-        <div class="checkbox-container" v-if="windowWidth <= 750">
-          <CheckboxInput v-model="formData.contacts.phone">
-            <p class="text-1">Телефон</p>
-          </CheckboxInput>
-          <CheckboxInput v-model="formData.contacts.telegram">
-            <p class="text-1">Telegram</p>
-          </CheckboxInput>
-          <CheckboxInput v-model="formData.contacts.whatsapp">
-            <p class="text-1">Whatsapp</p>
-          </CheckboxInput>
-        </div>
+        <TextInput
+          v-model="formData.fio"
+          placeholder="ФИО *"
+          :is-error="errors.fio"
+        />
+        <TextInput
+          v-model="formData.phone"
+          placeholder="Телефон *"
+          :is-error="errors.phone"
+        />
+        <TextInput placeholder="Почта *" :is-error="errors.phone" />
+        <TextInput placeholder="Телеграм ID *" />
+        <TextInput
+          v-model="formData.question"
+          placeholder="Напишите свой вопрос, чтобы мы смогли провести подробную консультацию"
+          class="textarea"
+          textarea
+          :is-error="errors.question"
+        />
       </div>
       <div class="button-container">
-        <Button class="feedback-button" @click="sendFeedback"
-          >Оставить заявку</Button
+        <ButtonComponent class="feedback-button" @click="sendFeedback"
+          >Связаться</ButtonComponent
         >
-        <p class="info text-1">
-          * Нажимая на кнопку, я соглашаюсь на обработку персональных данных,
-          <br v-if="windowWidth > 1200" />
-          с публичной офертой
+        <p class="text-2">
+          * Нажимая на кнопку, я соглашаюсь на обработку персональных данных, с
+          публичной офертой
         </p>
       </div>
     </div>
@@ -122,47 +96,26 @@ $desktop-width: 1200px;
 .feedback {
   display: flex;
   flex-direction: column;
-  gap: 110px;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 
   margin: 0 auto;
-
-  @include variables.mobile {
-    gap: 50px;
-  }
 }
 
 .feedback-container {
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  gap: 15px;
 
-  @include variables.tablet {
-    flex-direction: column;
-  }
-
-  @include variables.mobile {
-    gap: 50px;
-  }
+  max-width: 780px;
+  width: 100%;
 }
 
 .feedback-input {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-
-  @include variables.mobile {
-    gap: 20px;
-  }
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  gap: 70px;
-
-  @include variables.tablet {
-    justify-content: space-between;
-    gap: 0;
-  }
+  gap: 20px;
 }
 
 .input-container {
@@ -177,8 +130,15 @@ $desktop-width: 1200px;
 
 .textarea {
   height: 130px;
-
   padding: 1rem 1.25rem;
+
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 300;
+
+  &::placeholder {
+    font-size: 1.25rem;
+  }
 
   @include variables.mobile {
     height: fit-content;
@@ -189,14 +149,16 @@ $desktop-width: 1200px;
 
 .button-container {
   display: flex;
-
-  position: relative;
-
-  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .feedback-button {
   width: 100%;
+  height: 130px;
+
+  padding: 1rem 1.25rem;
 
   font-family: "Dela Gothic One", sans-serif;
   font-size: 1.25rem;
@@ -209,25 +171,6 @@ $desktop-width: 1200px;
     font-family: Roboto, sans-serif;
     font-size: 1rem;
     font-weight: 300;
-  }
-}
-
-.info {
-  position: absolute;
-  white-space: nowrap;
-  top: 105%;
-
-  @media (max-width: $desktop-width) {
-    white-space: normal;
-  }
-
-  @include variables.tablet {
-    top: 120%;
-  }
-
-  @include variables.mobile {
-    font-size: 0.8rem;
-    text-align: center;
   }
 }
 </style>

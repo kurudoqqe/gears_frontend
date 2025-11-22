@@ -27,7 +27,7 @@ const props = defineProps({});
 
   &:hover {
     background-color: map.get(variables.$color, white);
-    color: map.get(variables.$color, secondary);
+    color: map.get(variables.$color, black);
 
     border: 1px solid map.get(variables.$color, secondary);
   }
