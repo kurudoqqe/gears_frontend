@@ -8,64 +8,64 @@ const windowWidth = useWindowWidth();
 </script>
 
 <template>
-  <section
-    class="help-card page-container"
-    :style="{ background: `url(${GradientBackground})` }"
-  >
-    <h1>
-      не знаете <br v-if="windowWidth <= 500" />
-      что выбрать?
-    </h1>
-    <Button class="help-button text-1" @click="jumpToSection()">
-      Заполните заявку
-    </Button>
-    <p class="text-1">и мы вам подскажем</p>
-  </section>
+    <section
+        class="help-card page-container"
+        :style="{ background: `url(${GradientBackground})` }"
+    >
+        <h1>
+            не знаете <br v-if="windowWidth <= 500" />
+            что выбрать?
+        </h1>
+        <Button class="help-button text-1" @click="jumpToSection()">
+            Заполните заявку
+        </Button>
+        <p class="text-1">и мы вам подскажем</p>
+    </section>
 </template>
 
 <style scoped lang="scss">
 @use "@/assets/global/variables";
 
 .help-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 
-  width: 100%;
-  height: 570px;
+    width: 100%;
+    height: 570px;
 
-  margin: 0 auto;
+    margin: 0 auto;
 
-  > h1 {
-    text-align: center;
-    letter-spacing: 2.5px;
-  }
+    > h1 {
+        text-align: center;
+        letter-spacing: 2.5px;
+    }
 
-  @include variables.desktop {
-    height: 400px;
-  }
+    @include variables.desktop-short {
+        height: 400px;
+    }
 
-  @include variables.tablet {
-    height: 350px;
-  }
+    @include variables.tablet {
+        height: 350px;
+    }
 
-  @include variables.mobile {
-    height: 540px;
+    @include variables.mobile {
+        height: 540px;
 
-    padding: 0 1.75rem;
-  }
+        padding: 0 1.75rem;
+    }
 }
 
 .help-button {
-  margin-top: 20px;
-  padding: 0.65rem 6.25rem;
+    margin-top: 20px;
+    padding: 0.65rem 6.25rem;
 
-  @include variables.mobile {
-    margin-top: 30px;
+    @include variables.mobile {
+        margin-top: 30px;
 
-    padding: 0.65rem 3.5rem;
-  }
+        padding: 0.65rem 3.5rem;
+    }
 }
 </style>

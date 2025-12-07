@@ -6,35 +6,41 @@
 
 html,
 body {
-  background-color: map.get(variables.$color, primary);
+    background-color: map.get(variables.$color, primary);
 
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 
-  @media (max-width: 1000px) {
-    .page-container {
-      max-width: map.get(variables.$page-width, tablet);
+    @media (max-width: 1600px) {
+        .page-container {
+            max-width: map.get(variables.$page-width, desktop-short);
+        }
     }
-  }
 
-  @media (max-width: 750px) {
-    .page-container {
-      max-width: calc(map.get(variables.$page-width, tablet) - 200px);
+    @media (max-width: 1280px) {
+        .page-container {
+            max-width: map.get(variables.$page-width, tablet);
+        }
     }
-  }
 
-  @media (max-width: 500px) {
-    .page-container {
-      max-width: map.get(variables.$page-width, mobile);
+    @media (max-width: 750px) {
+        .page-container {
+            max-width: calc(map.get(variables.$page-width, tablet) - 200px);
+        }
     }
-  }
+
+    @media (max-width: 500px) {
+        .page-container {
+            max-width: map.get(variables.$page-width, mobile);
+        }
+    }
 }
 
 .page-container {
-  max-width: map.get(variables.$page-width, desktop);
+    max-width: map.get(variables.$page-width, desktop);
 }
 
 * {
-  color: map.get(variables.$color, white);
+    color: map.get(variables.$color, white);
 
-  scroll-margin-top: 125px;
+    scroll-margin-top: 125px;
 }

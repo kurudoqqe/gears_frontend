@@ -22,94 +22,94 @@ import Menu from "@/components/menu/MenuComponent.vue";
 const isActiveMenu = ref(false);
 
 const toggleMenu = () => {
-  isActiveMenu.value = !isActiveMenu.value;
+    isActiveMenu.value = !isActiveMenu.value;
 };
 </script>
 
 <template>
-  <Menu v-if="isActiveMenu" :toggle-menu="toggleMenu" />
-  <main v-else>
-    <article
-      :style="{ backgroundImage: `url(${GradientBackground1})` }"
-      class="first-container"
-    >
-      <Header :toggle-menu="toggleMenu" />
-      <HeaderCard />
-      <ServicesContainer />
-    </article>
-    <article
-      :style="{ backgroundImage: `url(${GradientBackground2})` }"
-      class="second-container"
-    >
-      <HelpCard />
-      <WorkProcess />
-      <PortfolioComponent />
-    </article>
-    <article
-      :style="{ backgroundImage: `url(${GradientBackground3})` }"
-      class="third-container"
-    >
-      <ApplicationButton />
-      <TeamSection />
-    </article>
-    <article
-      :style="{ backgroundImage: `url(${GradientBackground4})` }"
-      class="fourth-container"
-    >
-      <FeedbackSection />
-    </article>
-    <article
-      :style="{ backgroundImage: `url(${GradientBackground5})` }"
-      class="fifth-container"
-    >
-      <BlogSection />
-    </article>
-    <Footer />
-  </main>
+    <Menu v-if="isActiveMenu" :toggle-menu="toggleMenu" />
+    <main v-else>
+        <article
+            :style="{ backgroundImage: `url(${GradientBackground1})` }"
+            class="first-container"
+        >
+            <Header :toggle-menu="toggleMenu" />
+            <HeaderCard />
+            <ServicesContainer />
+        </article>
+        <article
+            :style="{ backgroundImage: `url(${GradientBackground2})` }"
+            class="second-container"
+        >
+            <HelpCard />
+            <WorkProcess />
+            <PortfolioComponent />
+        </article>
+        <article
+            :style="{ backgroundImage: `url(${GradientBackground3})` }"
+            class="third-container"
+        >
+            <ApplicationButton />
+            <TeamSection />
+        </article>
+        <article
+            :style="{ backgroundImage: `url(${GradientBackground4})` }"
+            class="fourth-container"
+        >
+            <FeedbackSection />
+        </article>
+        <article
+            :style="{ backgroundImage: `url(${GradientBackground5})` }"
+            class="fifth-container"
+        >
+            <BlogSection />
+        </article>
+        <Footer />
+    </main>
 </template>
 
 <style scoped lang="scss">
 @use "@/assets/global/variables";
 
 article {
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .second-container {
-  padding-top: 200px;
+    padding-top: 200px;
 
-  @include variables.tablet {
-    padding-top: 150px;
-  }
+    @include variables.tablet {
+        padding-top: 150px;
+    }
 }
 
 .third-container {
-  padding-top: 330px;
+    padding-top: 330px;
 
-  @include variables.tablet {
-    padding-top: 150px;
-  }
+    @include variables.tablet {
+        padding-top: 150px;
+    }
 }
 
 .fourth-container {
-  padding-top: 145px;
-  padding-bottom: 240px;
+    padding-top: 145px;
+    padding-bottom: 240px;
 
-  @include variables.tablet {
-    padding-top: 150px;
-    padding-bottom: 160px;
-  }
+    @include variables.tablet {
+        padding-top: 150px;
+        padding-bottom: 160px;
+    }
 }
 
 .fifth-container {
-  padding-top: 60px;
-  padding-bottom: 240px;
+    padding-top: 60px;
+    padding-bottom: 240px;
 
-  @include variables.tablet {
-    padding-top: 40px;
-    padding-bottom: 150px;
-  }
+    @include variables.tablet {
+        padding-top: 40px;
+        padding-bottom: 150px;
+    }
 }
 </style>
