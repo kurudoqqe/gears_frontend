@@ -12,6 +12,7 @@ const totalPages = ref(1);
 const videosData = ref([]);
 
 const videosPerPage = computed(() => {
+    if (windowWidth.value > 1650) return 5;
     if (windowWidth.value > 1100) return 4;
     if (windowWidth.value > 750) return 3;
     return 2;
@@ -35,8 +36,6 @@ onMounted(async () => {
     videosData.value = blogVideos;
     totalPages.value = 4;
 });
-
-watch(currentPage.value, () => {});
 </script>
 
 <template>
@@ -79,9 +78,7 @@ watch(currentPage.value, () => {});
     flex-wrap: wrap;
     gap: 20px;
 
-    @include variables.desktop-short {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+    @include variables.desktop {
         justify-content: space-between;
     }
 

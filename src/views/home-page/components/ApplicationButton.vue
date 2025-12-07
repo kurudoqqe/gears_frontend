@@ -4,33 +4,33 @@ import { jumpToSection } from "@/utils.js";
 </script>
 
 <template>
-  <section class="page-container">
-    <Button class="application-button" @click="jumpToSection('feedback')"
-      >Заполнить заявку</Button
-    >
-  </section>
+    <section class="page-container">
+        <Button class="application-button" @click="jumpToSection('feedback')"
+            >Заполнить заявку</Button
+        >
+    </section>
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/global/variables";
+@use "@/assets/global/variables.scss";
 
 .page-container {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 .application-button {
-  width: 100%;
-  height: 300px;
+    width: 100%;
+    height: 300px;
 
-  font-family: "Dela Gothic One", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 400;
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
 
-  @include variables.tablet {
-    height: 250px;
-  }
+    @include variables.tablet {
+        height: 250px;
+    }
 
-  @include variables.mobile {
-    height: 200px;
-  }
+    @include variables.mobile {
+        height: 200px;
+    }
 }
 </style>

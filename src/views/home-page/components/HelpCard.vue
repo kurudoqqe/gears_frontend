@@ -10,7 +10,10 @@ const windowWidth = useWindowWidth();
 <template>
     <section
         class="help-card page-container"
-        :style="{ background: `url(${GradientBackground})` }"
+        :style="{
+            background: `url(${GradientBackground})`,
+            backgroundSize: 'cover',
+        }"
     >
         <h1>
             не знаете <br v-if="windowWidth <= 500" />
@@ -24,7 +27,7 @@ const windowWidth = useWindowWidth();
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/global/variables";
+@use "@/assets/global/variables.scss";
 
 .help-card {
     display: flex;

@@ -31,7 +31,7 @@ const props = defineProps({
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/global/variables";
+@use "@/assets/global/variables.scss";
 @use "sass:map";
 
 header {

@@ -1,41 +1,41 @@
-@use "@/assets/global/variables";
+@use "@/assets/global/variables.scss";
 
-@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 h1 {
-  font-size: 2rem;
-  font-family: "Dela Gothic One", sans-serif;
-  text-transform: uppercase;
+    font-size: 2rem;
+    font-family: "Dela Gothic One", sans-serif;
+    text-transform: uppercase;
 
-  @include variables.mobile {
-    font-size: 1.5rem;
-  }
+    @include variables.mobile {
+        font-size: 1.5rem;
+    }
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  font-family: Roboto, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: Roboto, sans-serif;
 
-  @include variables.mobile {
-    font-size: 1.25rem;
-  }
+    @include variables.mobile {
+        font-size: 1.25rem;
+    }
 }
 
 .text-1 {
-  font-size: 1.25rem;
-  font-weight: 300;
-  font-family: Roboto, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-family: Roboto, sans-serif;
 
-  @include variables.mobile {
-    font-size: 1rem;
-  }
+    @include variables.mobile {
+        font-size: 1rem;
+    }
 }
 
 .text-2 {
-  font-size: 1rem;
-  font-weight: 300;
-  font-family: Roboto, sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: Roboto, sans-serif;
 }

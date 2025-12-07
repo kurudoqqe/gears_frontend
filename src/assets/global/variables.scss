@@ -14,13 +14,13 @@ $page-width: (
 );
 
 @mixin desktop {
-    @media (max-width: 1920px) {
+    @media (min-width: 1600px) {
         @content;
     }
 }
 
 @mixin desktop-short {
-    @media (max-width: 1280px) {
+    @media (max-width: 1600px) {
         @content;
     }
 }

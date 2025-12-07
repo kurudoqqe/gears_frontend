@@ -8,138 +8,144 @@ const portfolioList = ref([]);
 const showAll = ref(false);
 
 const displayedPortfolios = computed(() => {
-  return showAll.value ? portfolioList.value : portfolioList.value.slice(0, 2);
+    return showAll.value
+        ? portfolioList.value
+        : portfolioList.value.slice(0, 2);
 });
 
 const toggleShowAll = () => {
-  showAll.value = !showAll.value;
+    showAll.value = !showAll.value;
 };
 
 onMounted(() => {
-  portfolioList.value = portfolios;
+    portfolioList.value = portfolios;
 });
 </script>
 
 <template>
-  <section class="portfolio page-container" id="portfolio">
-    <h1>Портфолио</h1>
-    <Card
-      class="card"
-      v-for="(portfolio, index) in displayedPortfolios"
-      :key="index"
-    >
-      <img :src="portfolio.photo" alt="" @dragstart.prevent />
-      <div class="project">
-        <h2>{{ portfolio.title }}</h2>
-        <div class="description">
-          <p class="text-1"><b>Цель:</b> {{ portfolio.purpose }}</p>
-          <p class="text-1"><b>Технологии:</b> {{ portfolio.technologies }}</p>
-          <p class="text-1"><b>Функции:</b> {{ portfolio.functions }}</p>
-        </div>
-      </div>
-    </Card>
-    <p
-      class="more text-1"
-      @click="toggleShowAll"
-      v-if="portfolioList.length > 2"
-    >
-      {{ !showAll ? "Увидеть больше" : "Скрыть" }}
-    </p>
-  </section>
+    <section class="portfolio page-container" id="portfolio">
+        <h1>Портфолио</h1>
+        <Card
+            class="card"
+            v-for="(portfolio, index) in displayedPortfolios"
+            :key="index"
+        >
+            <img :src="portfolio.photo" alt="" @dragstart.prevent />
+            <div class="project">
+                <h2>{{ portfolio.title }}</h2>
+                <div class="description">
+                    <p class="text-1"><b>Цель:</b> {{ portfolio.purpose }}</p>
+                    <p class="text-1">
+                        <b>Технологии:</b> {{ portfolio.technologies }}
+                    </p>
+                    <p class="text-1">
+                        <b>Функции:</b> {{ portfolio.functions }}
+                    </p>
+                </div>
+            </div>
+        </Card>
+        <p
+            class="more text-1"
+            @click="toggleShowAll"
+            v-if="portfolioList.length > 2"
+        >
+            {{ !showAll ? "Увидеть больше" : "Скрыть" }}
+        </p>
+    </section>
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/global/variables";
+@use "@/assets/global/variables.scss";
 @use "sass:map";
 
 .portfolio {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 
-  margin: 190px auto 0;
+    margin: 210px auto 0;
 
-  > h1 {
-    margin-bottom: 20px;
-  }
+    > h1 {
+        margin-bottom: 20px;
+    }
 
-  @include variables.mobile {
-    gap: 20px;
+    @include variables.mobile {
+        gap: 20px;
 
-    margin: 150px auto 0;
-  }
+        margin: 150px auto 0;
+    }
 }
 
 .card {
-  display: flex;
-  gap: 20px;
-  flex-direction: row-reverse;
+    display: flex;
+    gap: 20px;
+    flex-direction: row-reverse;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  padding: 1.25rem;
+    padding: 1.25rem;
 
-  > video,
-  img {
-    border: 2px solid map.get(variables.$color, white);
+    > video,
+    img {
+        border: 2px solid map.get(variables.$color, white);
 
-    width: 100%;
-    height: 270px;
+        width: 100%;
+        height: 270px;
 
-    @include variables.mobile {
-      aspect-ratio: 320/270;
+        @include variables.mobile {
+            aspect-ratio: 320/270;
+        }
     }
-  }
 
-  &:nth-child(2n) {
-    flex-direction: row;
+    &:nth-child(2n) {
+        flex-direction: row;
 
-    @include variables.tablet {
-      flex-direction: column;
+        @include variables.tablet {
+            flex-direction: column;
+        }
     }
-  }
 }
 
 .project {
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
 
-  width: 100%;
+    width: 100%;
 
-  @include variables.tablet {
-    gap: 10px;
-  }
+    @include variables.tablet {
+        gap: 10px;
+    }
 }
 
 .description {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-  height: 100%;
+    height: 100%;
 
-  b {
-    font-weight: 600;
-  }
+    b {
+        font-weight: 600;
+    }
 
-  @include variables.tablet {
-    justify-content: normal;
-    gap: 10px;
-  }
+    @include variables.tablet {
+        justify-content: normal;
+        gap: 10px;
+    }
 
-  > p.text-1 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+    > p.text-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }
 
 .more {
-  text-align: center;
-  text-decoration: underline;
-  cursor: pointer;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
 }
 </style>

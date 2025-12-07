@@ -69,7 +69,7 @@ const toggleMenu = () => {
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/global/variables";
+@use "@/assets/global/variables.scss";
 
 article {
     background-size: 100% 100%;
@@ -80,6 +80,10 @@ article {
 .second-container {
     padding-top: 200px;
 
+    @include variables.desktop {
+        padding-top: 125px;
+    }
+
     @include variables.tablet {
         padding-top: 150px;
     }
@@ -88,14 +92,22 @@ article {
 .third-container {
     padding-top: 330px;
 
+    @include variables.desktop {
+        padding-top: 150px;
+    }
+
     @include variables.tablet {
         padding-top: 150px;
     }
 }
 
 .fourth-container {
-    padding-top: 145px;
+    padding-top: 170px;
     padding-bottom: 240px;
+
+    @include variables.desktop {
+        padding-bottom: 125px;
+    }
 
     @include variables.tablet {
         padding-top: 150px;
