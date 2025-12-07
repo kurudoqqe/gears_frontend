@@ -2,18 +2,9 @@
 import { onUnmounted, onMounted, ref } from "vue";
 
 import TelegramIcon from "@/components/icons/TelegramIcon.vue";
-import MaximTepinImage from "@/assets/images/Maxim Tepin.jpg";
-import AlexandraImage from "@/assets/images/Alexandra.jpg";
 import ArrowIcon from "@/components/icons/ArrowIcon.vue";
-import ViktoriaImage from "@/assets/images/Viktoria.jpg";
-import VeronikaImage from "@/assets/images/Veronika.jpg";
-import MaximkaImage from "@/assets/images/Maximka.jpg";
 import HabrIcon from "@/components/icons/HabrIcon.vue";
-import KetrinImage from "@/assets/images/Ketrin.jpg";
-import VadimImage from "@/assets/images/Vadim.jpg";
-import IvanImage from "@/assets/images/Ivan.jpg";
-import AnnaImage from "@/assets/images/Anna.jpg";
-import OlegImage from "@/assets/images/Oleg.jpg";
+import { teamMembers } from "@/mocks/team.mock.js";
 
 const teamContainer = ref(null);
 const showLeftArrow = ref(false);
@@ -41,12 +32,20 @@ const scrollRight = () => {
     }
 };
 
-const setActiveMember = (index) => {
-    if (index === currentActiveMember.value) {
+const setActiveMember = (id) => {
+    if (id === currentActiveMember.value) {
         currentActiveMember.value = null;
     } else {
-        currentActiveMember.value = index;
+        currentActiveMember.value = id;
     }
+};
+
+const getIconComponent = (iconName) => {
+    const iconMap = {
+        telegram: TelegramIcon,
+        habr: HabrIcon,
+    };
+    return iconMap[iconName] || null;
 };
 
 onMounted(() => {
@@ -74,433 +73,45 @@ onUnmounted(() => {
                 @click="scrollLeft"
             />
             <div class="team" ref="teamContainer">
-                <div class="member-container">
+                <div
+                    v-for="member in teamMembers"
+                    :key="member.id"
+                    class="member-container"
+                >
                     <div
                         class="member"
                         :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%), url(${IvanImage}) center/cover no-repeat`,
+                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%), url(${member.image}) center/cover no-repeat`,
+                            ...(member.backgroundPosition && {
+                                backgroundPosition: member.backgroundPosition,
+                            }),
                         }"
-                        @click="setActiveMember(1)"
+                        @click="setActiveMember(member.id)"
                     >
                         <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
+                            <h2>{{ member.name }}</h2>
+                            <p class="text-1">{{ member.shortDescription }}</p>
                         </div>
                     </div>
                     <Transition name="slide">
                         <div
                             class="member-info"
-                            v-if="currentActiveMember === 1"
+                            v-if="currentActiveMember === member.id"
                         >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
+                            <p
+                                v-for="(paragraph, index) in member.description"
+                                :key="index"
+                                class="text-2"
+                            >
+                                {{ paragraph }}
                             </p>
                             <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${MaximTepinImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(2)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 2"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${KetrinImage}) center/cover no-repeat`,
-                            backgroundPosition: 'center',
-                        }"
-                        @click="setActiveMember(3)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 3"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${ViktoriaImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(4)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 4"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${OlegImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(5)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 5"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${AnnaImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(6)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 6"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${VeronikaImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(7)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 7"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${AlexandraImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(8)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 8"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${VadimImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(9)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 9"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div class="member-container">
-                    <div
-                        class="member"
-                        :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%),  url(${MaximkaImage}) center/cover no-repeat`,
-                        }"
-                        @click="setActiveMember(10)"
-                    >
-                        <div class="member-text">
-                            <h2>Иван Ткачёв</h2>
-                            <p class="text-1">
-                                Гений, миллиардер, плейбой, филантроп
-                            </p>
-                        </div>
-                    </div>
-                    <Transition name="slide">
-                        <div
-                            class="member-info"
-                            v-if="currentActiveMember === 10"
-                        >
-                            <p class="text-2">
-                                Team Lead и Product Manager с опытом
-                                коммерческой разработки на Python
-                                (Django/FastAPI). Специализируюсь на создании и
-                                выведении на рынок сложных веб-сервисов и
-                                Telegram-решений: от проектирования архитектуры
-                                и управления командой до реализации и поддержки.
-                            </p>
-                            <p class="text-2">
-                                Разрабатывал и курировал проекты полного цикла:
-                                CRM/LMS системы, маркетплейсы, e-commerce
-                                платформы и мини-приложения. Обладаю глубокими
-                                знаниями в бэкенд-разработке и DevOps (Docker,
-                                nginx, CI/CD) для обеспечения надежности и
-                                масштабируемости продуктов.
-                            </p>
-                            <div class="icons-container">
-                                <TelegramIcon class="member-icon" />
-                                <HabrIcon class="member-icon" />
+                                <component
+                                    v-for="(iconName, index) in member.icons"
+                                    :key="index"
+                                    :is="getIconComponent(iconName)"
+                                    class="member-icon"
+                                />
                             </div>
                         </div>
                     </Transition>
