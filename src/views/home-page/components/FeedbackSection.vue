@@ -144,6 +144,11 @@ $desktop-short-width: 1200px;
         height: fit-content;
 
         padding: 0.65rem;
+        font-size: 1rem;
+
+        &::placeholder {
+            font-size: 1rem;
+        }
     }
 }
 
