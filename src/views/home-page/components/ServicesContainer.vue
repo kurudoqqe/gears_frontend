@@ -3,13 +3,15 @@ import { onMounted, computed, ref } from "vue";
 
 import CardComponent from "@/components/card/CardComponent.vue";
 import RobotIcon from "@/components/icons/RobotIcon.vue";
-import { services } from "@/mocks/services.mock.js";
+import { getServices } from "@/api/services.js";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
 
 const windowWidth = useWindowWidth();
 
 const showAll = ref(false);
 const servicesList = ref([]);
+const isLoading = ref(true);
+const error = ref(null);
 
 const displayedServices = computed(() => {
     return showAll.value ? servicesList.value : servicesList.value.slice(0, 4);
@@ -20,10 +22,16 @@ const toggleShowAll = () => {
 };
 
 onMounted(async () => {
-    // await getServices()
-    //   .then((res) => (servicesList.value = res))
-    //   .catch((err) => console.log(err));
-    servicesList.value = services;
+    try {
+        isLoading.value = true;
+        const response = await getServices();
+        servicesList.value = response.data.services;
+    } catch (err) {
+        console.error("Ошибка при загрузке услуг:", err);
+        error.value = err;
+    } finally {
+        isLoading.value = false;
+    }
 });
 </script>
 
@@ -31,21 +39,21 @@ onMounted(async () => {
     <section
         class="services page-container"
         id="services"
-        v-if="servicesList.length > 0"
+        v-if="!isLoading && servicesList.length > 0"
     >
         <h1>Услуги и тарифы</h1>
         <div class="services-container">
             <CardComponent
                 class="service"
-                v-for="(service, index) in displayedServices"
-                :key="index"
+                v-for="service in displayedServices"
+                :key="service.id"
             >
                 <div class="service-icon">
                     <RobotIcon />
                 </div>
                 <div class="service-info">
                     <h2>{{ service.title }}</h2>
-                    <p class="text-1">{{ service.content }}</p>
+                    <p class="text-1">{{ service.description }}</p>
                     <h2>{{ service.price }}</h2>
                 </div>
             </CardComponent>
