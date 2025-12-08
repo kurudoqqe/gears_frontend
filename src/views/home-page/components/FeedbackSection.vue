@@ -75,7 +75,10 @@ const errors = ref({
                 />
             </div>
             <div class="button-container">
-                <ButtonComponent class="feedback-button" @click="sendFeedback"
+                <ButtonComponent
+                    class="feedback-button"
+                    @click="sendFeedback"
+                    secondary
                     >Связаться</ButtonComponent
                 >
                 <p class="text-2">

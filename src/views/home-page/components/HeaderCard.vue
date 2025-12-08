@@ -23,6 +23,7 @@ import { jumpToSection } from "@/utils.js";
             <ButtonComponent
                 class="button text-1"
                 @click="jumpToSection('feedback')"
+                secondary
                 >Заполнить заявку</ButtonComponent
             >
             <ButtonComponent
