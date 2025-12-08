@@ -2,10 +2,12 @@
 import { onMounted, computed, ref } from "vue";
 
 import Card from "@/components/card/CardComponent.vue";
-import { portfolios } from "@/mocks/portfolio.mock.js";
+import { getPortfolio } from "@/api/portfolio.js";
 
 const portfolioList = ref([]);
 const showAll = ref(false);
+const isLoading = ref(true);
+const error = ref(null);
 
 const displayedPortfolios = computed(() => {
     return showAll.value
@@ -17,29 +19,55 @@ const toggleShowAll = () => {
     showAll.value = !showAll.value;
 };
 
-onMounted(() => {
-    portfolioList.value = portfolios;
+onMounted(async () => {
+    try {
+        isLoading.value = true;
+        const response = await getPortfolio();
+        portfolioList.value = response.data.projects;
+    } catch (err) {
+        console.error("Ошибка при загрузке портфолио:", err);
+        error.value = err;
+    } finally {
+        isLoading.value = false;
+    }
 });
 </script>
 
 <template>
-    <section class="portfolio page-container" id="portfolio">
+    <section
+        class="portfolio page-container"
+        id="portfolio"
+        v-if="!isLoading && portfolioList.length > 0"
+    >
         <h1>Портфолио</h1>
         <Card
             class="card"
-            v-for="(portfolio, index) in displayedPortfolios"
-            :key="index"
+            v-for="portfolio in displayedPortfolios"
+            :key="portfolio.id"
         >
-            <img :src="portfolio.photo" alt="" @dragstart.prevent />
+            <img
+                v-if="
+                    portfolio.gallery_urls && portfolio.gallery_urls.length > 0
+                "
+                :src="portfolio.gallery_urls[0]"
+                alt=""
+                @dragstart.prevent
+            />
             <div class="project">
                 <h2>{{ portfolio.title }}</h2>
                 <div class="description">
-                    <p class="text-1"><b>Цель:</b> {{ portfolio.purpose }}</p>
-                    <p class="text-1">
-                        <b>Технологии:</b> {{ portfolio.technologies }}
+                    <p class="text-1" v-if="portfolio.description">
+                        <b>Цель:</b> {{ portfolio.description }}
                     </p>
-                    <p class="text-1">
-                        <b>Функции:</b> {{ portfolio.functions }}
+                    <p
+                        class="text-1"
+                        v-if="
+                            portfolio.technologies &&
+                            portfolio.technologies.length > 0
+                        "
+                    >
+                        <b>Технологии:</b>
+                        {{ portfolio.technologies.join(", ") }}
                     </p>
                 </div>
             </div>
