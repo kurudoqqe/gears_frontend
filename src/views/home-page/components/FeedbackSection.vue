@@ -3,18 +3,16 @@ import { ref } from "vue";
 
 import ButtonComponent from "@/components/button/ButtonComponent.vue";
 import TextInput from "@/components/input/TextInput.vue";
+import { sendRequest } from "@/api/request";
 
 // const windowWidth = useWindowWidth();
 
 const formData = ref({
-    contacts: {
-        telegram: false,
-        whatsapp: false,
-        phone: false,
-    },
     question: "",
     phone: "",
     fio: "",
+    email: "",
+    telegram: "",
 });
 
 const errors = ref({
@@ -23,30 +21,29 @@ const errors = ref({
     fio: false,
 });
 
-// const sendFeedback = () => {
-//   const contactsArray = [];
-//   if (formData.value.contacts.telegram) contactsArray.push("Telegram");
-//   if (formData.value.contacts.whatsapp) contactsArray.push("Whatsapp");
-//   if (formData.value.contacts.phone) contactsArray.push("Телефон");
-//
-//   errors.value.question = formData.value.question === "";
-//   errors.value.phone = formData.value.phone === "";
-//   errors.value.fio = formData.value.fio === "";
-//
-//   if (errors.value.phone || errors.value.fio || errors.value.question) {
-//     return null;
-//   }
-//
-//   const requestData = {
-//     ...formData.value,
-//     question: formData.value.question,
-//     phone: formData.value.phone,
-//     contacts: contactsArray,
-//     fio: formData.value.fio,
-//   };
-//
-//   sendRequest(requestData);
-// };
+const sendFeedback = () => {
+    errors.value.question = formData.value.question === "";
+    errors.value.phone = formData.value.phone === "";
+    errors.value.fio = formData.value.fio === "";
+
+    if (errors.value.phone || errors.value.fio || errors.value.question) {
+        return null;
+    }
+
+    const contacts = [];
+    if (formData.value.phone) contacts.push(formData.value.phone);
+    if (formData.value.email) contacts.push(formData.value.email);
+    if (formData.value.telegram) contacts.push(formData.value.telegram);
+
+    const requestData = {
+        fio: formData.value.fio,
+        phone: formData.value.phone,
+        question: formData.value.question,
+        contacts: contacts,
+    };
+
+    sendRequest(requestData);
+};
 </script>
 
 <template>
@@ -64,8 +61,15 @@ const errors = ref({
                     placeholder="Телефон *"
                     :is-error="errors.phone"
                 />
-                <TextInput placeholder="Почта *" :is-error="errors.phone" />
-                <TextInput placeholder="Телеграм ID *" />
+                <TextInput
+                    v-model="formData.email"
+                    placeholder="Почта *"
+                    :is-error="errors.phone"
+                />
+                <TextInput
+                    v-model="formData.telegram"
+                    placeholder="Телеграм ID *"
+                />
                 <TextInput
                     v-model="formData.question"
                     placeholder="Напишите свой вопрос, чтобы мы смогли провести подробную консультацию"
