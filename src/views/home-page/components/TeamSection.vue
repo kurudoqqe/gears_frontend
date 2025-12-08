@@ -1,15 +1,18 @@
 <script setup>
-import { onUnmounted, onMounted, ref } from "vue";
+import { onUnmounted, onMounted, ref, watch } from "vue";
 
 import TelegramIcon from "@/components/icons/TelegramIcon.vue";
 import ArrowIcon from "@/components/icons/ArrowIcon.vue";
 import HabrIcon from "@/components/icons/HabrIcon.vue";
-import { teamMembers } from "@/mocks/team.mock.js";
+import { getTeam } from "@/api/team.js";
 
 const teamContainer = ref(null);
 const showLeftArrow = ref(false);
 const showRightArrow = ref(false);
 const currentActiveMember = ref(null);
+const teamMembers = ref([]);
+const isLoading = ref(true);
+const error = ref(null);
 
 const checkScroll = () => {
     if (!teamContainer.value) return;
@@ -44,15 +47,28 @@ const setActiveMember = (id) => {
     }
 };
 
-const getIconComponent = (iconName) => {
+const getIconComponent = (socialLink) => {
+    if (!socialLink || !socialLink.type) return null;
+
     const iconMap = {
         telegram: TelegramIcon,
         habr: HabrIcon,
     };
-    return iconMap[iconName] || null;
+    return iconMap[socialLink.type] || null;
 };
 
-onMounted(() => {
+onMounted(async () => {
+    try {
+        isLoading.value = true;
+        const response = await getTeam();
+        teamMembers.value = response.data.teams;
+    } catch (err) {
+        console.error("Ошибка при загрузке команды:", err);
+        error.value = err;
+    } finally {
+        isLoading.value = false;
+    }
+
     if (teamContainer.value) {
         teamContainer.value.addEventListener("scroll", checkScroll);
         checkScroll();
@@ -64,10 +80,18 @@ onUnmounted(() => {
         teamContainer.value.removeEventListener("scroll", checkScroll);
     }
 });
+
+watch(teamMembers.value, () => {
+    console.log(teamMembers.value);
+});
 </script>
 
 <template>
-    <section class="team-section page-container" id="team">
+    <section
+        class="team-section page-container"
+        id="team"
+        v-if="!isLoading && teamMembers.length > 0"
+    >
         <h1>О команде</h1>
         <div class="team-wrapper">
             <ArrowIcon
@@ -86,16 +110,13 @@ onUnmounted(() => {
                     <div
                         class="member"
                         :style="{
-                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%), url(${member.image}) center/cover no-repeat`,
-                            ...(member.backgroundPosition && {
-                                backgroundPosition: member.backgroundPosition,
-                            }),
+                            background: `linear-gradient(180deg, rgba(33, 33, 33, 0.18) 69.82%, rgba(33, 33, 33, 0.9) 92.55%), url(${member.photo_url || ''}) center/cover no-repeat`,
                         }"
                         @click="setActiveMember(member.id)"
                     >
                         <div class="member-text">
                             <h2>{{ member.name }}</h2>
-                            <p class="text-1">{{ member.shortDescription }}</p>
+                            <p class="text-1">{{ member.position }}</p>
                         </div>
                     </div>
                     <Transition name="slide">
@@ -103,18 +124,22 @@ onUnmounted(() => {
                             class="member-info"
                             v-if="currentActiveMember === member.id"
                         >
-                            <p
-                                v-for="(paragraph, index) in member.description"
-                                :key="index"
-                                class="text-2"
-                            >
-                                {{ paragraph }}
+                            <p class="text-2" v-if="member.bio">
+                                {{ member.bio }}
                             </p>
-                            <div class="icons-container">
+                            <div
+                                class="icons-container"
+                                v-if="
+                                    member.social_links &&
+                                    member.social_links.length > 0
+                                "
+                            >
                                 <component
-                                    v-for="(iconName, index) in member.icons"
+                                    v-for="(
+                                        socialLink, index
+                                    ) in member.social_links"
                                     :key="index"
-                                    :is="getIconComponent(iconName)"
+                                    :is="getIconComponent(socialLink)"
                                     class="member-icon"
                                 />
                             </div>
