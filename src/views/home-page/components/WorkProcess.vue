@@ -47,6 +47,8 @@ import ArrowLeft from "@/assets/images/arrow-left.png";
 <style scoped lang="scss">
 @use "@/assets/global/variables.scss";
 
+$breakpoint-tablet-large: 1280px;
+
 .work-process {
     display: flex;
     flex-direction: column;
@@ -84,6 +86,17 @@ import ArrowLeft from "@/assets/images/arrow-left.png";
             align-self: end;
         }
     }
+
+    @media (max-width: $breakpoint-tablet-large) {
+        flex-direction: row;
+        align-self: stretch;
+
+        &-left,
+        &-right {
+            margin-top: 0;
+            align-self: stretch;
+        }
+    }
 }
 
 .work-content {
@@ -104,11 +117,27 @@ import ArrowLeft from "@/assets/images/arrow-left.png";
     &.large {
         max-width: 630px;
     }
+
+    @media (max-width: $breakpoint-tablet-large) {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+        align-items: start;
+        gap: 20px 20px;
+        max-width: 600px;
+    }
 }
 
 .work-number {
     max-height: 100px;
     width: fit-content;
+
+    @media (max-width: $breakpoint-tablet-large) {
+        grid-column: 1;
+        grid-row: 1;
+
+        max-height: 40px;
+    }
 }
 
 .work-arrow {
@@ -119,6 +148,10 @@ import ArrowLeft from "@/assets/images/arrow-left.png";
 
     &.last {
         max-width: 215px;
+    }
+
+    @media (max-width: $breakpoint-tablet-large) {
+        display: none;
     }
 }
 
@@ -131,5 +164,25 @@ import ArrowLeft from "@/assets/images/arrow-left.png";
 
     text-align: justify;
     line-height: 100%;
+
+    @media (max-width: $breakpoint-tablet-large) {
+        display: contents;
+        width: auto;
+    }
+
+    h2 {
+        @media (max-width: $breakpoint-tablet-large) {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: end;
+        }
+    }
+
+    p {
+        @media (max-width: $breakpoint-tablet-large) {
+            grid-column: 1 / -1;
+            grid-row: 2;
+        }
+    }
 }
 </style>
