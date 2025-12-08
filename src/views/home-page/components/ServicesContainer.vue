@@ -4,6 +4,9 @@ import { onMounted, computed, ref } from "vue";
 import CardComponent from "@/components/card/CardComponent.vue";
 import RobotIcon from "@/components/icons/RobotIcon.vue";
 import { services } from "@/mocks/services.mock.js";
+import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+
+const windowWidth = useWindowWidth();
 
 const showAll = ref(false);
 const servicesList = ref([]);
@@ -50,7 +53,7 @@ onMounted(async () => {
         <p
             class="text-1 show-more"
             @click="toggleShowAll"
-            v-if="servicesList.length > 4"
+            v-if="servicesList.length > 4 && windowWidth > 500"
         >
             {{ showAll ? "Скрыть" : "Увидеть больше" }}
         </p>
@@ -70,12 +73,25 @@ onMounted(async () => {
     @include variables.desktop {
         margin: 100px auto 0;
     }
+
+    @include variables.mobile {
+        margin: 150px auto 0;
+    }
 }
 
 .services-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @media (max-width: 500px) {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .service {
@@ -87,11 +103,24 @@ onMounted(async () => {
     @include variables.desktop {
         min-height: 200px;
     }
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        flex-shrink: 0;
+        width: 100%;
+        min-width: 100%;
+    }
 }
 
 .service-icon {
     min-width: 125px;
     min-height: 100px;
+
+    @media (max-width: 500px) {
+        align-self: center;
+    }
 }
 
 .service-info {
@@ -100,6 +129,11 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @media (max-width: 500px) {
+        align-self: center;
+        width: 100%;
+    }
 }
 
 .show-more {

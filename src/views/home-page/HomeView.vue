@@ -123,5 +123,9 @@ article {
         padding-top: 40px;
         padding-bottom: 150px;
     }
+
+    @include variables.mobile {
+        padding-top: 0;
+    }
 }
 </style>

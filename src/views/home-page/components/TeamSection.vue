@@ -14,6 +14,10 @@ const currentActiveMember = ref(null);
 const checkScroll = () => {
     if (!teamContainer.value) return;
 
+    if (currentActiveMember.value !== null) {
+        currentActiveMember.value = null;
+    }
+
     showLeftArrow.value = teamContainer.value.scrollLeft > 0;
     showRightArrow.value =
         teamContainer.value.scrollLeft <
@@ -77,6 +81,7 @@ onUnmounted(() => {
                     v-for="member in teamMembers"
                     :key="member.id"
                     class="member-container"
+                    :class="{ 'is-open': currentActiveMember === member.id }"
                 >
                     <div
                         class="member"
@@ -143,6 +148,10 @@ onUnmounted(() => {
     @include variables.desktop {
         margin: 150px auto 0;
     }
+
+    @include variables.mobile {
+        margin: 150px auto 0;
+    }
 }
 
 .team-wrapper {
@@ -169,10 +178,23 @@ onUnmounted(() => {
     display: flex;
     position: relative;
     height: 550px;
+    transition:
+        height 300ms ease-in-out,
+        width 300ms ease-in-out;
+    width: 370px;
+
+    @include variables.desktop {
+        &.is-open {
+            width: 730px;
+        }
+    }
 
     @include variables.mobile {
         flex-direction: column;
-        height: 1000px;
+
+        &.is-open {
+            height: 1000px;
+        }
     }
 }
 
@@ -194,11 +216,13 @@ onUnmounted(() => {
         height: 550px;
     }
 
-    &:hover {
-        transform: scale(1.075);
+    @media (hover: hover) {
+        &:hover {
+            transform: scale(1.075);
 
-        .member-text {
-            transform: translateY(-40%);
+            .member-text {
+                transform: translateY(-40%);
+            }
         }
     }
 
@@ -271,6 +295,10 @@ onUnmounted(() => {
 
         cursor: pointer;
     }
+
+    @include variables.mobile {
+        display: none;
+    }
 }
 
 .slide-enter-active,
@@ -282,5 +310,13 @@ onUnmounted(() => {
 .slide-leave-to {
     opacity: 0;
     transform: translateX(-10%);
+}
+
+@include variables.mobile {
+    .slide-enter-from,
+    .slide-leave-to {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
 }
 </style>

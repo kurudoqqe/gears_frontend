@@ -69,10 +69,14 @@ onMounted(() => {
         margin-bottom: 20px;
     }
 
-    @include variables.mobile {
+    @include variables.tablet {
         gap: 20px;
 
         margin: 150px auto 0;
+    }
+
+    @include variables.mobile {
+        margin: 50px auto 0;
     }
 }
 
