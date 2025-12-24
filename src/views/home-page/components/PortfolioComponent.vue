@@ -45,14 +45,7 @@ onMounted(async () => {
             v-for="portfolio in displayedPortfolios"
             :key="portfolio.id"
         >
-            <img
-                v-if="
-                    portfolio.gallery_urls && portfolio.gallery_urls.length > 0
-                "
-                :src="portfolio.gallery_urls[0]"
-                alt=""
-                @dragstart.prevent
-            />
+            <img :src="portfolio.image_url" alt="" @dragstart.prevent />
             <div class="project">
                 <h2>{{ portfolio.title }}</h2>
                 <div class="description">
