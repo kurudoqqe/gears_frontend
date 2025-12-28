@@ -50,7 +50,7 @@ onMounted(async () => {
                 <h2>{{ portfolio.title }}</h2>
                 <div class="description">
                     <p class="text-1" v-if="portfolio.description">
-                        <b>Цель:</b> {{ portfolio.description }}
+                        <b>Описание:</b> {{ portfolio.description }}
                     </p>
                     <p
                         class="text-1"
@@ -150,6 +150,13 @@ onMounted(async () => {
 
     height: 100%;
 
+    > p.text-1 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
+    }
+
     b {
         font-weight: 600;
     }
@@ -157,14 +164,6 @@ onMounted(async () => {
     @include variables.tablet {
         justify-content: normal;
         gap: 10px;
-    }
-
-    > p.text-1 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        text-overflow: ellipsis;
-        overflow: hidden;
     }
 }
 

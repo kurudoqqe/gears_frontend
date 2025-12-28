@@ -7,13 +7,11 @@ import ApplicationButton from "@/views/home-page/components/ApplicationButton.vu
 import FeedbackSection from "@/views/home-page/components/FeedbackSection.vue";
 import WorkProcess from "@/views/home-page/components/WorkProcess.vue";
 import TeamSection from "@/views/home-page/components/TeamSection.vue";
-import BlogSection from "@/views/home-page/components/BlogSection.vue";
 import HeaderCard from "@/views/home-page/components/HeaderCard.vue";
 import GradientBackground1 from "@/assets/images/background1.png";
 import GradientBackground2 from "@/assets/images/background2.png";
 import GradientBackground3 from "@/assets/images/background3.png";
 import GradientBackground4 from "@/assets/images/background4.png";
-import GradientBackground5 from "@/assets/images/background5.png";
 import HelpCard from "@/views/home-page/components/HelpCard.vue";
 import Header from "@/components/header/HeaderComponent.vue";
 import Footer from "@/components/footer/FooterComponent.vue";
@@ -57,12 +55,6 @@ const toggleMenu = () => {
             class="fourth-container"
         >
             <FeedbackSection />
-        </article>
-        <article
-            :style="{ backgroundImage: `url(${GradientBackground5})` }"
-            class="fifth-container"
-        >
-            <BlogSection />
         </article>
         <Footer />
     </main>
