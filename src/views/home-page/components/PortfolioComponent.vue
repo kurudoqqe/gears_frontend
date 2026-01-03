@@ -114,11 +114,13 @@ onMounted(async () => {
     img {
         border: 2px solid map.get(variables.$color, white);
 
+        max-width: 360px;
+
         width: 100%;
-        height: 270px;
+        aspect-ratio: 16/9;
 
         @include variables.mobile {
-            aspect-ratio: 320/270;
+            aspect-ratio: 16/12;
         }
     }
 
