@@ -52,7 +52,7 @@ import { jumpToSection } from "@/utils.js";
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/global/variables.scss";
+@use "@/assets/global/variables";
 @use "sass:map";
 
 .header-card {
@@ -75,7 +75,9 @@ import { jumpToSection } from "@/utils.js";
 }
 
 .card-title {
+    max-width: 58%;
     min-height: 120px;
+
     margin-bottom: 55px;
 }
 

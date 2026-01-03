@@ -49,16 +49,19 @@ const startTyping = () => {
 }
 
 .typewriter {
-    max-width: 58%;
-
     white-space: normal;
     overflow: visible;
     word-wrap: break-word;
 
     font-size: 2rem;
+    user-select: none;
 
     @include variables.desktop {
         font-size: 2.5rem;
+    }
+
+    @include variables.tablet {
+        font-size: 1.5rem;
     }
 }
 
