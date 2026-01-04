@@ -1,45 +1,32 @@
 <script setup>
-import { onMounted, computed, ref } from "vue";
+import { computed, ref } from "vue";
 
 import CardComponent from "@/components/card/CardComponent.vue";
-import RobotIcon from "@/components/icons/RobotIcon.vue";
-import { getServices } from "@/api/services.js";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+import RobotIcon from "@/components/icons/RobotIcon.vue";
+import { useServicesStore } from "@/stores/services.js";
 
 const windowWidth = useWindowWidth();
+const servicesStore = useServicesStore();
 
 const showAll = ref(false);
-const servicesList = ref([]);
-const isLoading = ref(true);
-const error = ref(null);
 
 const displayedServices = computed(() => {
-    return showAll.value ? servicesList.value : servicesList.value.slice(0, 4);
+    return showAll.value
+        ? servicesStore.servicesList
+        : servicesStore.servicesList.slice(0, 4);
 });
 
 const toggleShowAll = () => {
     showAll.value = !showAll.value;
 };
-
-onMounted(async () => {
-    try {
-        isLoading.value = true;
-        const response = await getServices();
-        servicesList.value = response.data.services;
-    } catch (err) {
-        console.error("Ошибка при загрузке услуг:", err);
-        error.value = err;
-    } finally {
-        isLoading.value = false;
-    }
-});
 </script>
 
 <template>
     <section
         class="services page-container"
         id="services"
-        v-if="!isLoading && servicesList.length > 0"
+        v-if="!servicesStore.isLoading && servicesStore.servicesList.length > 0"
     >
         <h1>Услуги и тарифы</h1>
         <div class="services-container">
@@ -61,7 +48,7 @@ onMounted(async () => {
         <p
             class="text-1 show-more"
             @click="toggleShowAll"
-            v-if="servicesList.length > 4 && windowWidth > 500"
+            v-if="servicesStore.servicesList.length > 4 && windowWidth > 500"
         >
             {{ showAll ? "Скрыть" : "Увидеть больше" }}
         </p>

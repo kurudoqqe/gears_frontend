@@ -9,10 +9,10 @@ import { sendRequest } from "@/api/request";
 
 const formData = ref({
     question: "",
-    phone: "",
-    fio: "",
-    email: "",
     telegram: "",
+    phone: "",
+    email: "",
+    fio: "",
 });
 
 const errors = ref({
@@ -36,9 +36,9 @@ const sendFeedback = () => {
     if (formData.value.telegram) contacts.push(formData.value.telegram);
 
     const requestData = {
-        fio: formData.value.fio,
-        phone: formData.value.phone,
         question: formData.value.question,
+        phone: formData.value.phone,
+        fio: formData.value.fio,
         contacts: contacts,
     };
 

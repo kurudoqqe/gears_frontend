@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 import PortfolioComponent from "@/views/home-page/components/PortfolioComponent.vue";
 import MobileHeader from "@/views/home-page/components/HeaderCard/MobileHeader.vue";
@@ -17,14 +17,73 @@ import HelpCard from "@/views/home-page/components/HelpCard.vue";
 import Header from "@/components/header/HeaderComponent.vue";
 import Footer from "@/components/footer/FooterComponent.vue";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+import { usePortfolioStore } from "@/stores/portfolio.js";
+import { useServicesStore } from "@/stores/services.js";
 import Menu from "@/components/menu/MenuComponent.vue";
+import { getPortfolio } from "@/api/portfolio.js";
+import { useTeamStore } from "@/stores/team.js";
+import { getServices } from "@/api/services.js";
+import { getTeam } from "@/api/team.js";
 
 const isActiveMenu = ref(false);
 const windowWidth = useWindowWidth();
 
+const servicesStore = useServicesStore();
+const portfolioStore = usePortfolioStore();
+const teamStore = useTeamStore();
+
 const toggleMenu = () => {
     isActiveMenu.value = !isActiveMenu.value;
 };
+
+onMounted(async () => {
+    try {
+        // Загружаем все данные параллельно
+        await Promise.all([
+            (async () => {
+                try {
+                    servicesStore.isLoading = true;
+                    servicesStore.error = null;
+                    const response = await getServices();
+                    servicesStore.servicesList = response.data.services;
+                } catch (err) {
+                    console.error("Ошибка при загрузке услуг:", err);
+                    servicesStore.error = err;
+                } finally {
+                    servicesStore.isLoading = false;
+                }
+            })(),
+            (async () => {
+                try {
+                    portfolioStore.isLoading = true;
+                    portfolioStore.error = null;
+                    const response = await getPortfolio();
+                    portfolioStore.portfolioList = response.data.projects;
+                } catch (err) {
+                    console.error("Ошибка при загрузке портфолио:", err);
+                    portfolioStore.error = err;
+                } finally {
+                    portfolioStore.isLoading = false;
+                }
+            })(),
+            (async () => {
+                try {
+                    teamStore.isLoading = true;
+                    teamStore.error = null;
+                    const response = await getTeam();
+                    teamStore.teamMembers = response.data.teams;
+                } catch (err) {
+                    console.error("Ошибка при загрузке команды:", err);
+                    teamStore.error = err;
+                } finally {
+                    teamStore.isLoading = false;
+                }
+            })(),
+        ]);
+    } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+    }
+});
 </script>
 
 <template>

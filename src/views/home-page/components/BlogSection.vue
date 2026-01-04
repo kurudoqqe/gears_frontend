@@ -1,17 +1,13 @@
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, watch } from "vue";
 
 import BlogPagination from "@/views/home-page/components/BlogPagination.vue";
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
+import { useBlogStore } from "@/stores/blog.js";
 import { getBlocksPage } from "@/api/blog.js";
 
 const windowWidth = useWindowWidth();
-
-const currentPage = ref(1);
-const totalPages = ref(1);
-const videosData = ref([]);
-const isLoading = ref(true);
-const error = ref(null);
+const blogStore = useBlogStore();
 
 const getPostsPerPage = () => {
     if (windowWidth.value > 1650) return 5;
@@ -24,31 +20,35 @@ const getMediaUrl = (post) => {
     if (post.video_url) return { url: post.video_url, type: "video" };
     if (post.audio_url) return { url: post.audio_url, type: "audio" };
     if (post.content_url) return { url: post.content_url, type: "content" };
-    return { url: null, type: null };
+    return { type: null, url: null };
 };
 
 const handlePageChange = async (page) => {
     try {
-        isLoading.value = true;
-        currentPage.value = page;
+        blogStore.isLoading = true;
+        blogStore.error = null;
         const perPage = getPostsPerPage();
         const response = await getBlocksPage(page, perPage);
-        videosData.value = response.data.posts;
-        totalPages.value = response.data.total_pages || 1;
+        blogStore.videosData = response.data.posts;
+        blogStore.currentPage = page;
+        blogStore.totalPages = response.data.total_pages || 1;
     } catch (err) {
         console.error("Ошибка при загрузке блога:", err);
-        error.value = err;
+        blogStore.error = err;
     } finally {
-        isLoading.value = false;
+        blogStore.isLoading = false;
     }
 };
 
-watch(windowWidth, () => {
-    handlePageChange(currentPage.value);
+onMounted(async () => {
+    // Загружаем данные только если они еще не загружены
+    if (blogStore.videosData.length === 0) {
+        await handlePageChange(1);
+    }
 });
 
-onMounted(async () => {
-    await handlePageChange(1);
+watch(windowWidth, () => {
+    handlePageChange(blogStore.currentPage);
 });
 </script>
 
@@ -56,11 +56,15 @@ onMounted(async () => {
     <section
         class="blog page-container"
         id="blog"
-        v-if="!isLoading && videosData.length > 0"
+        v-if="!blogStore.isLoading && blogStore.videosData.length > 0"
     >
         <h1>Блог</h1>
         <div class="blog-content">
-            <div v-for="post in videosData" :key="post.id" class="blog-video">
+            <div
+                v-for="post in blogStore.videosData"
+                :key="post.id"
+                class="blog-video"
+            >
                 <video
                     v-if="getMediaUrl(post).type === 'video'"
                     controls
@@ -81,9 +85,9 @@ onMounted(async () => {
         </div>
 
         <BlogPagination
-            v-if="totalPages > 1"
-            :current-page="currentPage"
-            :total-pages="totalPages"
+            v-if="blogStore.totalPages > 1"
+            :current-page="blogStore.currentPage"
+            :total-pages="blogStore.totalPages"
             @page-change="handlePageChange"
         />
     </section>

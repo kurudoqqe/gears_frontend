@@ -1,18 +1,16 @@
 <script setup>
-import { onUnmounted, onMounted, ref, watch } from "vue";
+import { onUnmounted, onMounted, ref } from "vue";
 
 import TelegramIcon from "@/components/icons/TelegramIcon.vue";
 import ArrowIcon from "@/components/icons/ArrowIcon.vue";
 import HabrIcon from "@/components/icons/HabrIcon.vue";
-import { getTeam } from "@/api/team.js";
+import { useTeamStore } from "@/stores/team.js";
 
+const teamStore = useTeamStore();
 const teamContainer = ref(null);
 const showLeftArrow = ref(false);
 const showRightArrow = ref(false);
 const currentActiveMember = ref(null);
-const teamMembers = ref([]);
-const isLoading = ref(true);
-const error = ref(null);
 
 const checkScroll = () => {
     if (!teamContainer.value) return;
@@ -57,18 +55,7 @@ const getIconComponent = (socialLink) => {
     return iconMap[socialLink.type] || null;
 };
 
-onMounted(async () => {
-    try {
-        isLoading.value = true;
-        const response = await getTeam();
-        teamMembers.value = response.data.teams;
-    } catch (err) {
-        console.error("Ошибка при загрузке команды:", err);
-        error.value = err;
-    } finally {
-        isLoading.value = false;
-    }
-
+onMounted(() => {
     if (teamContainer.value) {
         teamContainer.value.addEventListener("scroll", checkScroll);
         checkScroll();
@@ -80,17 +67,13 @@ onUnmounted(() => {
         teamContainer.value.removeEventListener("scroll", checkScroll);
     }
 });
-
-watch(teamMembers.value, () => {
-    console.log(teamMembers.value);
-});
 </script>
 
 <template>
     <section
         class="team-section page-container"
         id="team"
-        v-if="!isLoading && teamMembers.length > 0"
+        v-if="!teamStore.isLoading && teamStore.teamMembers.length > 0"
     >
         <h1>О команде</h1>
         <div class="team-wrapper">
@@ -102,7 +85,7 @@ watch(teamMembers.value, () => {
             />
             <div class="team" ref="teamContainer">
                 <div
-                    v-for="member in teamMembers"
+                    v-for="member in teamStore.teamMembers"
                     :key="member.id"
                     class="member-container"
                     :class="{ 'is-open': currentActiveMember === member.id }"

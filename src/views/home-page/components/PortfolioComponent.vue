@@ -1,43 +1,30 @@
 <script setup>
-import { onMounted, computed, ref } from "vue";
+import { computed, ref } from "vue";
 
+import { usePortfolioStore } from "@/stores/portfolio.js";
 import Card from "@/components/card/CardComponent.vue";
-import { getPortfolio } from "@/api/portfolio.js";
 
-const portfolioList = ref([]);
+const portfolioStore = usePortfolioStore();
 const showAll = ref(false);
-const isLoading = ref(true);
-const error = ref(null);
 
 const displayedPortfolios = computed(() => {
     return showAll.value
-        ? portfolioList.value
-        : portfolioList.value.slice(0, 2);
+        ? portfolioStore.portfolioList
+        : portfolioStore.portfolioList.slice(0, 2);
 });
 
 const toggleShowAll = () => {
     showAll.value = !showAll.value;
 };
-
-onMounted(async () => {
-    try {
-        isLoading.value = true;
-        const response = await getPortfolio();
-        portfolioList.value = response.data.projects;
-    } catch (err) {
-        console.error("Ошибка при загрузке портфолио:", err);
-        error.value = err;
-    } finally {
-        isLoading.value = false;
-    }
-});
 </script>
 
 <template>
     <section
         class="portfolio page-container"
         id="portfolio"
-        v-if="!isLoading && portfolioList.length > 0"
+        v-if="
+            !portfolioStore.isLoading && portfolioStore.portfolioList.length > 0
+        "
     >
         <h1>Портфолио</h1>
         <Card
@@ -68,7 +55,7 @@ onMounted(async () => {
         <p
             class="more text-1"
             @click="toggleShowAll"
-            v-if="portfolioList.length > 2"
+            v-if="portfolioStore.portfolioList.length > 2"
         >
             {{ !showAll ? "Увидеть больше" : "Скрыть" }}
         </p>

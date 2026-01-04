@@ -2,8 +2,8 @@
 const props = defineProps({
     secondary: {
         required: false,
-        type: Boolean,
         default: false,
+        type: Boolean,
     },
 });
 </script>

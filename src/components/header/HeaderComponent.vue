@@ -2,8 +2,12 @@
 import { useWindowWidth } from "@/hooks/useWindowWidth.js";
 import LogoIcon from "@/components/icons/LogoIcon.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
+import { useTeamStore } from "@/stores/team.js";
+import { useBlogStore } from "@/stores/blog.js";
 
 const windowWidth = useWindowWidth();
+const teamStore = useTeamStore();
+const blogStore = useBlogStore();
 
 const props = defineProps({
     toggleMenu: {
@@ -20,8 +24,18 @@ const props = defineProps({
             <a href="#services" class="text-1">Услуги</a>
             <a href="#processes" class="text-1">Этапы работы</a>
             <a href="#portfolio" class="text-1">Портфолио</a>
-            <a href="#team" class="text-1">Компетенции</a>
-            <a href="#blog" class="text-1">Блог</a>
+            <a
+                href="#team"
+                class="text-1"
+                v-if="!teamStore.isLoading && teamStore.teamMembers.length > 0"
+                >Компетенции</a
+            >
+            <a
+                href="#blog"
+                class="text-1"
+                v-if="!blogStore.isLoading && blogStore.videosData.length > 0"
+                >Блог</a
+            >
         </div>
         <a href="#feedback" class="text-1" v-if="windowWidth > 1000"
             >Связаться</a

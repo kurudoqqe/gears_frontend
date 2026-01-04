@@ -8,6 +8,8 @@ import CloseIcon from "@/components/icons/CloseIcon.vue";
 import LogoIcon from "@/components/icons/LogoIcon.vue";
 import HabrIcon from "@/components/icons/HabrIcon.vue";
 import VKIcon from "@/components/icons/VKIcon.vue";
+import { useTeamStore } from "@/stores/team.js";
+import { useBlogStore } from "@/stores/blog.js";
 
 const props = defineProps({
     toggleMenu: {
@@ -15,6 +17,9 @@ const props = defineProps({
         required: true,
     },
 });
+
+const teamStore = useTeamStore();
+const blogStore = useBlogStore();
 
 const goToLink = (url) => {
     window.open(url);
@@ -35,8 +40,26 @@ const goToLink = (url) => {
             <a href="#portfolio" class="text-1" @click="toggleMenu"
                 >Портфолио</a
             >
-            <a href="#team" class="text-1" @click="toggleMenu">Компетенции</a>
-            <a href="#blog" class="text-1" @click="toggleMenu">Блог</a>
+            <a
+                href="#team"
+                class="text-1"
+                @click="toggleMenu"
+                v-if="
+                    !teamStore.isLoading &&
+                    teamStore.teamMembers.length > 0
+                "
+                >Компетенции</a
+            >
+            <a
+                href="#blog"
+                class="text-1"
+                @click="toggleMenu"
+                v-if="
+                    !blogStore.isLoading &&
+                    blogStore.videosData.length > 0
+                "
+                >Блог</a
+            >
         </div>
         <div class="connect">
             <h1 class="number">
